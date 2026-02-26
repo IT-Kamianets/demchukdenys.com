@@ -1,35 +1,89 @@
 <section id="services" class="py-20 lg:py-28 bg-white dark:bg-dark-light" appScrollAnimate>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <span class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block">Що ми робимо</span>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white mb-4">Наші послуги</h2>
-      <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Повний цикл створення меблів - від першої консультації до встановлення у вашому домі</p>
-    </div>
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="text-center mb-16">
+			<span
+				class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block"
+				>Що ми робимо</span
+			>
+			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white mb-4">
+				Наші послуги
+			</h2>
+			<p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+				Повний цикл створення меблів - від першої консультації до встановлення у вашому домі
+			</p>
+		</div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" appScrollAnimateChildren [staggerDelay]="150">
-      @for (service of services; track service.title) {
-        <a routerLink="/services" class="group relative bg-warm-white dark:bg-dark rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 block">
-          <div class="aspect-[4/3] overflow-hidden">
-            <img [src]="service.image" [alt]="service.title" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-          </div>
-          <!-- Gradient overlay on image -->
-          <div class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="relative p-8 text-center">
-            <div class="w-12 h-12 bg-beige/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-beige/30 transition-colors">
-              <svg class="w-6 h-6 text-beige-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-dark dark:text-white mb-3">{{ service.title }}</h3>
-            <p class="text-gray-500 dark:text-gray-400 leading-relaxed text-sm">{{ service.description }}</p>
-          </div>
-        </a>
-      }
-    </div>
+		<div
+			class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+			appScrollAnimateChildren
+			[staggerDelay]="150"
+		>
+			@for (service of services; track service.title) {
+				<a
+					routerLink="/services"
+					class="group relative bg-warm-white dark:bg-dark rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 block"
+				>
+					<div class="aspect-[4/3] overflow-hidden">
+						<img
+							[src]="service.image"
+							[alt]="service.title"
+							loading="lazy"
+							class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+						/>
+					</div>
+					<!-- Gradient overlay on image -->
+					<div
+						class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+					></div>
+					<div class="relative p-8 text-center">
+						<div
+							class="w-12 h-12 bg-beige/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-beige/30 transition-colors"
+						>
+							<svg
+								class="w-6 h-6 text-beige-dark"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
+								/>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-dark dark:text-white mb-3">
+							{{ service.title }}
+						</h3>
+						<p class="text-gray-500 dark:text-gray-400 leading-relaxed text-sm">
+							{{ service.description }}
+						</p>
+					</div>
+				</a>
+			}
+		</div>
 
-    <div class="text-center mt-12">
-      <a routerLink="/services" class="inline-flex items-center justify-center px-8 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors">
-        Детальніше про послуги
-        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-      </a>
-    </div>
-  </div>
+		<div class="text-center mt-12">
+			<a
+				routerLink="/services"
+				class="inline-flex items-center justify-center px-8 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
+			>
+				Детальніше про послуги
+				<svg
+					class="w-4 h-4 ml-2"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+					/>
+				</svg>
+			</a>
+		</div>
+	</div>
 </section>

@@ -1,65 +1,134 @@
 <section id="portfolio" class="py-20 lg:py-28 bg-warm-white dark:bg-dark" appScrollAnimate>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
-      <div>
-        <span class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block">Портфоліо</span>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white">Кращі роботи</h2>
-      </div>
-      <a routerLink="/portfolios" class="mt-4 md:mt-0 inline-flex items-center text-beige-dark font-semibold hover:text-dark dark:hover:text-beige-light transition-colors">
-        Всі роботи
-        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-      </a>
-    </div>
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col md:flex-row md:items-end md:justify-between mb-14">
+			<div>
+				<span
+					class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block"
+					>Портфоліо</span
+				>
+				<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white">
+					Кращі роботи
+				</h2>
+			</div>
+			<a
+				routerLink="/portfolios"
+				class="mt-4 md:mt-0 inline-flex items-center text-beige-dark font-semibold hover:text-dark dark:hover:text-beige-light transition-colors"
+			>
+				Всі роботи
+				<svg
+					class="w-4 h-4 ml-2"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+					/>
+				</svg>
+			</a>
+		</div>
 
-    <!-- Carousel -->
-    <div
-      class="relative"
-      (mouseenter)="stopAutoPlay()"
-      (mouseleave)="startAutoPlay()"
-    >
-      <div
-        class="overflow-hidden rounded-2xl"
-        (touchstart)="onTouchStart($event)"
-        (touchend)="onTouchEnd($event)"
-      >
-        <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
-          @for (item of portfolioItems; track item.id) {
-            <div class="w-full flex-shrink-0">
-              <a [routerLink]="['/portfolio', item.id]" class="relative group block cursor-pointer">
-                <div class="aspect-[16/8] sm:aspect-[16/7] overflow-hidden rounded-2xl">
-                  <img [src]="item.image" [alt]="item.title" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                </div>
-                <!-- Overlay with text -->
-                <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent rounded-2xl flex items-end">
-                  <div class="p-6 sm:p-10">
-                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">{{ item.title }}</h3>
-                    <p class="text-gray-300 text-sm sm:text-base max-w-lg">{{ item.description }}</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          }
-        </div>
-      </div>
+		<!-- Carousel -->
+		<div class="relative" (mouseenter)="stopAutoPlay()" (mouseleave)="startAutoPlay()">
+			<div
+				class="overflow-hidden rounded-2xl"
+				(touchstart)="onTouchStart($event)"
+				(touchend)="onTouchEnd($event)"
+			>
+				<div
+					class="flex transition-transform duration-500 ease-in-out"
+					[style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
+				>
+					@for (item of portfolioItems; track item.id) {
+						<div class="w-full flex-shrink-0">
+							<a
+								[routerLink]="['/portfolio', item.id]"
+								class="relative group block cursor-pointer"
+							>
+								<div
+									class="aspect-[16/8] sm:aspect-[16/7] overflow-hidden rounded-2xl"
+								>
+									<img
+										[src]="item.image"
+										[alt]="item.title"
+										loading="lazy"
+										class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+									/>
+								</div>
+								<!-- Overlay with text -->
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent rounded-2xl flex items-end"
+								>
+									<div class="p-6 sm:p-10">
+										<h3
+											class="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2"
+										>
+											{{ item.title }}
+										</h3>
+										<p class="text-gray-300 text-sm sm:text-base max-w-lg">
+											{{ item.description }}
+										</p>
+									</div>
+								</div>
+							</a>
+						</div>
+					}
+				</div>
+			</div>
 
-      <!-- Navigation buttons -->
-      <button (click)="prevSlide()" class="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full items-center justify-center text-dark hover:bg-beige transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-      </button>
-      <button (click)="nextSlide()" class="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full items-center justify-center text-dark hover:bg-beige transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-      </button>
-    </div>
+			<!-- Navigation buttons -->
+			<button
+				(click)="prevSlide()"
+				class="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full items-center justify-center text-dark hover:bg-beige transition-colors"
+			>
+				<svg
+					class="w-5 h-5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M15.75 19.5L8.25 12l7.5-7.5"
+					/>
+				</svg>
+			</button>
+			<button
+				(click)="nextSlide()"
+				class="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full items-center justify-center text-dark hover:bg-beige transition-colors"
+			>
+				<svg
+					class="w-5 h-5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M8.25 4.5l7.5 7.5-7.5 7.5"
+					/>
+				</svg>
+			</button>
+		</div>
 
-    <!-- Dots -->
-    <div class="flex justify-center space-x-2 mt-8">
-      @for (item of portfolioItems; track item.id; let i = $index) {
-        <button
-          (click)="currentSlide = i"
-          class="h-2 rounded-full transition-all duration-300"
-          [class]="currentSlide === i ? 'bg-beige w-8' : 'bg-gray-300 dark:bg-gray-600 w-2'"
-        ></button>
-      }
-    </div>
-  </div>
+		<!-- Dots -->
+		<div class="flex justify-center space-x-2 mt-8">
+			@for (item of portfolioItems; track item.id; let i = $index) {
+				<button
+					(click)="currentSlide = i"
+					class="h-2 rounded-full transition-all duration-300"
+					[class]="
+						currentSlide === i ? 'bg-beige w-8' : 'bg-gray-300 dark:bg-gray-600 w-2'
+					"
+				></button>
+			}
+		</div>
+	</div>
 </section>

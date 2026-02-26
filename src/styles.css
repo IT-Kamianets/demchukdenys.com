@@ -1,78 +1,88 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-beige: #d3c9b7;
-  --color-beige-light: #e8e0d4;
-  --color-beige-dark: #b8a998;
-  --color-dark: #1a1a1a;
-  --color-dark-light: #2d2d2d;
-  --color-warm-white: #f5f0eb;
+	--color-beige: #d3c9b7;
+	--color-beige-light: #e8e0d4;
+	--color-beige-dark: #b8a998;
+	--color-dark: #1a1a1a;
+	--color-dark-light: #2d2d2d;
+	--color-warm-white: #f5f0eb;
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
 }
 
 .dark body,
 html.dark body {
-  background-color: #1a1a1a;
-  color: #f5f0eb;
+	background-color: #1a1a1a;
+	color: #f5f0eb;
 }
 
 /* Prevent horizontal overflow on mobile */
-html, body {
-  overflow-x: hidden;
+html,
+body {
+	overflow-x: hidden;
 }
 
 /* Page entrance animation */
 router-outlet + * {
-  animation: pageEnter 0.4s ease-out;
+	animation: pageEnter 0.4s ease-out;
 }
 
 @keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Improve touch targets on mobile */
 @media (max-width: 640px) {
-  a, button {
-    min-height: 44px;
-    min-width: 44px;
-  }
+	a,
+	button {
+		min-height: 44px;
+		min-width: 44px;
+	}
 }
 
 /* Selection color */
 ::selection {
-  background-color: #d3c9b7;
-  color: #1a1a1a;
+	background-color: #d3c9b7;
+	color: #1a1a1a;
 }
 
 /* Smooth image rendering */
 img {
-  image-rendering: auto;
+	image-rendering: auto;
 }
 
 /* Focus styles for accessibility */
@@ -80,24 +90,24 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #d3c9b7;
-  outline-offset: 2px;
+	outline: 2px solid #d3c9b7;
+	outline-offset: 2px;
 }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+	background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b8a998;
-  border-radius: 4px;
+	background: #b8a998;
+	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d3c9b7;
+	background: #d3c9b7;
 }

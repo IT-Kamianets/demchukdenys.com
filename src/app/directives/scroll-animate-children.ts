@@ -1,50 +1,50 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appScrollAnimateChildren]',
+	selector: '[appScrollAnimateChildren]',
 })
 export class ScrollAnimateChildrenDirective implements OnInit, OnDestroy {
-  @Input() staggerDelay = 100;
-  private observer!: IntersectionObserver;
+	@Input() staggerDelay = 100;
+	private observer!: IntersectionObserver;
 
-  constructor(private el: ElementRef<HTMLElement>) {}
+	constructor(private el: ElementRef<HTMLElement>) {}
 
-  ngOnInit() {
-    const container = this.el.nativeElement;
+	ngOnInit() {
+		const container = this.el.nativeElement;
 
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const children = Array.from(container.children) as HTMLElement[];
-            children.forEach((child, index) => {
-              child.style.opacity = '0';
-              child.style.transform = 'translateY(20px)';
-              child.style.transition = `opacity 0.5s ease-out ${index * this.staggerDelay}ms, transform 0.5s ease-out ${index * this.staggerDelay}ms`;
+		this.observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const children = Array.from(container.children) as HTMLElement[];
+						children.forEach((child, index) => {
+							child.style.opacity = '0';
+							child.style.transform = 'translateY(20px)';
+							child.style.transition = `opacity 0.5s ease-out ${index * this.staggerDelay}ms, transform 0.5s ease-out ${index * this.staggerDelay}ms`;
 
-              requestAnimationFrame(() => {
-                child.style.opacity = '1';
-                child.style.transform = 'translateY(0)';
-              });
-            });
-            this.observer.unobserve(container);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+							requestAnimationFrame(() => {
+								child.style.opacity = '1';
+								child.style.transform = 'translateY(0)';
+							});
+						});
+						this.observer.unobserve(container);
+					}
+				});
+			},
+			{ threshold: 0.1 },
+		);
 
-    // Pre-hide children
-    const children = Array.from(container.children) as HTMLElement[];
-    children.forEach((child) => {
-      child.style.opacity = '0';
-      child.style.transform = 'translateY(20px)';
-    });
+		// Pre-hide children
+		const children = Array.from(container.children) as HTMLElement[];
+		children.forEach((child) => {
+			child.style.opacity = '0';
+			child.style.transform = 'translateY(20px)';
+		});
 
-    this.observer.observe(container);
-  }
+		this.observer.observe(container);
+	}
 
-  ngOnDestroy() {
-    this.observer.disconnect();
-  }
+	ngOnDestroy() {
+		this.observer.disconnect();
+	}
 }
