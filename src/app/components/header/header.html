@@ -3,10 +3,9 @@
 	[class]="scrolled ? 'bg-dark/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-dark'"
 >
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
 		<div class="relative flex items-center justify-between h-14 lg:h-20">
 			<!-- Logo -->
-			<a routerLink="/" class="hover:opacity-80 transition-opacity">
+			<a routerLink="/" class="hover:opacity-80 transition-opacity max-sm:mt-2">
 				<img src="logo.png" alt="Demchuk Denys" class="h-8 lg:h-10" />
 			</a>
 
@@ -67,10 +66,27 @@
 			</div>
 
 			<!-- Mobile: Nav centered -->
-			<nav class="lg:hidden absolute inset-0 flex items-center justify-center gap-3 sm:gap-4 pointer-events-none">
-				<a routerLink="/articles" class="text-xs uppercase tracking-wider text-gray-300 hover:text-beige transition-colors pointer-events-auto" routerLinkActive="text-beige">Новини</a>
-				<a routerLink="/portfolios" class="text-xs uppercase tracking-wider text-gray-300 hover:text-beige transition-colors pointer-events-auto" routerLinkActive="text-beige">Роботи</a>
-				<a routerLink="/services" class="text-xs uppercase tracking-wider text-gray-300 hover:text-beige transition-colors pointer-events-auto" routerLinkActive="text-beige">Послуги</a>
+			<nav
+				class="lg:hidden absolute inset-0 flex items-center justify-center gap-3 sm:gap-4 pointer-events-none max-sm:mt-7"
+			>
+				<a
+					routerLink="/articles"
+					class="text-xs uppercase tracking-wider text-gray-300 hover:text-beige transition-colors pointer-events-auto"
+					routerLinkActive="text-beige"
+					>Новини</a
+				>
+				<a
+					routerLink="/portfolios"
+					class="text-xs uppercase tracking-wider text-gray-300 hover:text-beige transition-colors pointer-events-auto"
+					routerLinkActive="text-beige"
+					>Роботи</a
+				>
+				<a
+					routerLink="/services"
+					class="text-xs uppercase tracking-wider text-gray-300 hover:text-beige transition-colors pointer-events-auto"
+					routerLinkActive="text-beige"
+					>Послуги</a
+				>
 			</nav>
 
 			<!-- Mobile: Theme toggle -->
@@ -78,7 +94,6 @@
 				<app-theme-toggle />
 			</div>
 		</div>
-
 	</div>
 </header>
 
