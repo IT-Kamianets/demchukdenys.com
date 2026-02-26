@@ -9,7 +9,6 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle';
 	styles: [],
 })
 export class HeaderComponent {
-	mobileMenuOpen = false;
 	scrolled = false;
 
 	@HostListener('window:scroll')

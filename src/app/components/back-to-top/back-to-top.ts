@@ -7,7 +7,7 @@ import { Component, HostListener } from '@angular/core';
 		@if (visible) {
 			<button
 				(click)="scrollToTop()"
-				class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-beige text-dark rounded-full shadow-lg flex items-center justify-center hover:bg-beige-light transition-all duration-300 animate-[fadeIn_0.3s_ease-out]"
+				class="fixed bottom-6 left-6 z-40 w-12 h-12 bg-beige text-dark rounded-full shadow-lg flex items-center justify-center hover:bg-beige-light transition-all duration-300 animate-[fadeIn_0.3s_ease-out]"
 				aria-label="Прокрутити вгору"
 			>
 				<svg

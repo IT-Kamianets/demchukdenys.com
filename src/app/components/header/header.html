@@ -3,14 +3,15 @@
 	[class]="scrolled ? 'bg-dark/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-dark'"
 >
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex items-center justify-between h-16 lg:h-20">
+
+		<div class="relative flex items-center justify-between h-14 lg:h-20">
 			<!-- Logo -->
 			<a routerLink="/" class="hover:opacity-80 transition-opacity">
 				<img src="logo.png" alt="Demchuk Denys" class="h-8 lg:h-10" />
 			</a>
 
 			<!-- Desktop Navigation -->
-			<nav class="hidden md:flex items-center space-x-8">
+			<nav class="hidden lg:flex items-center space-x-8">
 				<a
 					routerLink="/articles"
 					class="text-sm uppercase tracking-widest text-gray-300 hover:text-beige transition-colors"
@@ -31,8 +32,8 @@
 				>
 			</nav>
 
-			<!-- Social / Contact -->
-			<div class="hidden md:flex items-center space-x-4">
+			<!-- Desktop Social / Contact -->
+			<div class="hidden lg:flex items-center space-x-4">
 				<a
 					href="https://t.me/demchuk_denys"
 					target="_blank"
@@ -65,97 +66,21 @@
 				</div>
 			</div>
 
-			<!-- Mobile menu button -->
-			<button
-				(click)="mobileMenuOpen = !mobileMenuOpen"
-				class="md:hidden text-gray-300 hover:text-beige transition-colors"
-			>
-				<svg
-					class="w-6 h-6"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					viewBox="0 0 24 24"
-				>
-					@if (!mobileMenuOpen) {
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M4 6h16M4 12h16M4 18h16"
-						/>
-					} @else {
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M6 18L18 6M6 6l12 12"
-						/>
-					}
-				</svg>
-			</button>
+			<!-- Mobile: Nav centered -->
+			<nav class="lg:hidden absolute inset-0 flex items-center justify-center gap-4 pointer-events-none pt-3">
+				<a routerLink="/articles" class="text-xs uppercase tracking-widest text-gray-300 hover:text-beige transition-colors pointer-events-auto" routerLinkActive="text-beige">Новини</a>
+				<a routerLink="/portfolios" class="text-xs uppercase tracking-widest text-gray-300 hover:text-beige transition-colors pointer-events-auto" routerLinkActive="text-beige">Роботи</a>
+				<a routerLink="/services" class="text-xs uppercase tracking-widest text-gray-300 hover:text-beige transition-colors pointer-events-auto" routerLinkActive="text-beige">Послуги</a>
+			</nav>
+
+			<!-- Mobile: Theme toggle -->
+			<div class="lg:hidden self-start">
+				<app-theme-toggle />
+			</div>
 		</div>
 
-		<!-- Mobile menu -->
-		@if (mobileMenuOpen) {
-			<div class="md:hidden pb-4 border-t border-gray-700 animate-[fadeIn_0.2s_ease-out]">
-				<nav class="flex flex-col space-y-3 pt-4">
-					<a
-						routerLink="/articles"
-						(click)="mobileMenuOpen = false"
-						class="text-sm uppercase tracking-widest text-gray-300 hover:text-beige transition-colors py-1"
-						routerLinkActive="text-beige"
-						>Новини</a
-					>
-					<a
-						routerLink="/portfolios"
-						(click)="mobileMenuOpen = false"
-						class="text-sm uppercase tracking-widest text-gray-300 hover:text-beige transition-colors py-1"
-						routerLinkActive="text-beige"
-						>Роботи</a
-					>
-					<a
-						routerLink="/services"
-						(click)="mobileMenuOpen = false"
-						class="text-sm uppercase tracking-widest text-gray-300 hover:text-beige transition-colors py-1"
-						routerLinkActive="text-beige"
-						>Послуги</a
-					>
-				</nav>
-				<div class="flex items-center space-x-4 pt-4">
-					<a
-						href="https://t.me/demchuk_denys"
-						target="_blank"
-						rel="noopener"
-						class="hover:opacity-70 transition-opacity"
-					>
-						<img src="img/social/1.svg" alt="Telegram" class="w-5 h-5 invert" />
-					</a>
-					<a href="tel:+380680278101" class="hover:opacity-70 transition-opacity">
-						<img src="img/social/2.svg" alt="Phone" class="w-5 h-5 invert" />
-					</a>
-					<a
-						href="https://www.facebook.com/denys.demchuk.2025"
-						target="_blank"
-						rel="noopener"
-						class="hover:opacity-70 transition-opacity"
-					>
-						<img src="img/social/3.svg" alt="Facebook" class="w-5 h-5 invert" />
-					</a>
-					<a
-						href="https://instagram.com/demchuk_denys"
-						target="_blank"
-						rel="noopener"
-						class="hover:opacity-70 transition-opacity"
-					>
-						<img src="img/social/4.svg" alt="Instagram" class="w-5 h-5 invert" />
-					</a>
-					<div class="border-l border-gray-700 pl-4 ml-2">
-						<app-theme-toggle />
-					</div>
-				</div>
-			</div>
-		}
 	</div>
 </header>
 
 <!-- Spacer for fixed header -->
-<div class="h-16 lg:h-20"></div>
+<div class="h-14 lg:h-20"></div>
