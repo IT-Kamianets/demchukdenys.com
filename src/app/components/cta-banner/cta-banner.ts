@@ -59,6 +59,21 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 						</svg>
 						Написати в Telegram
 					</a>
+					<a
+						href="https://maps.app.goo.gl/mbz6eWD6n89nspTg7"
+						target="_blank"
+						rel="noopener"
+						class="inline-flex items-center px-8 py-3 bg-white/80 text-dark font-semibold rounded-lg hover:bg-white transition-colors"
+					>
+						<svg
+							class="w-5 h-5 mr-2"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+						</svg>
+						Знайти шоурум
+					</a>
 				</div>
 			</div>
 		</section>
