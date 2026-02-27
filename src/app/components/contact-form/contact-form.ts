@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 
@@ -9,9 +10,12 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 	styles: [],
 })
 export class ContactFormComponent {
+	private _httpClient = inject(HttpClient);
+
 	name = '';
 	phone = '';
 	email = '';
+	address = '';
 	message = '';
 	submitted = false;
 
@@ -19,6 +23,13 @@ export class ContactFormComponent {
 		if (this.name.trim() && this.phone.trim()) {
 			this.submitted = true;
 		}
+
+		this._httpClient
+			.post('https://api.webart.work/api/bot/message', {
+				chatid: '-5135274845',
+				message: `Ім'я: ${this.name}\nТелефон: ${this.phone}\nEmail: ${this.email}\nАдреса: ${this.address}\nПовідомлення: ${this.message}`,
+			})
+			.subscribe();
 	}
 
 	resetForm() {
