@@ -37,6 +37,7 @@ export class ContactFormComponent {
 		this.phone = '';
 		this.email = '';
 		this.message = '';
+		this.address = '';
 		this.submitted = false;
 	}
 }
