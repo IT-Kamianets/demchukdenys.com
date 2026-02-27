@@ -39,7 +39,7 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 						Зателефонувати
 					</a>
 					<a
-						href="https://t.me/demchuk_denys"
+						href="https://t.me/Demchukdv"
 						target="_blank"
 						rel="noopener"
 						class="inline-flex items-center px-8 py-3 bg-white/80 text-dark font-semibold rounded-lg hover:bg-white transition-colors"
