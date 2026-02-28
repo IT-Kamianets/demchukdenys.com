@@ -34,18 +34,18 @@
 			<!-- Desktop Social / Contact -->
 			<div class="hidden lg:flex items-center space-x-4">
 				<a
-					href="https://t.me/Demchukdv"
+					[href]="telegramUrl"
 					target="_blank"
 					rel="noopener"
 					class="hover:opacity-70 transition-opacity"
 				>
 					<img src="img/social/1.svg" alt="Telegram" class="w-5 h-5 invert" />
 				</a>
-				<a href="tel:+380680278101" class="hover:opacity-70 transition-opacity">
+				<a [href]="phoneHref" class="hover:opacity-70 transition-opacity">
 					<img src="img/social/2.svg" alt="Phone" class="w-5 h-5 invert" />
 				</a>
 				<a
-					href="https://www.facebook.com/denys.demchuk.2025"
+					[href]="facebookUrl"
 					target="_blank"
 					rel="noopener"
 					class="hover:opacity-70 transition-opacity"
@@ -53,7 +53,7 @@
 					<img src="img/social/3.svg" alt="Facebook" class="w-5 h-5 invert" />
 				</a>
 				<a
-					href="https://instagram.com/demchuk_denys"
+					[href]="instagramUrl"
 					target="_blank"
 					rel="noopener"
 					class="hover:opacity-70 transition-opacity"

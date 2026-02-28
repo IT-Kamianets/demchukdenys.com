@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-floating-contact',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
 			@if (open) {
 				<div class="flex flex-col gap-3 mb-3 animate-[fadeIn_0.2s_ease-out]">
 					<a
-						href="https://www.facebook.com/denys.demchuk.2025"
+						[href]="facebookUrl"
 						target="_blank"
 						rel="noopener"
 						class="w-12 h-12 bg-[#1877F2] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
@@ -22,7 +23,7 @@ import { Component } from '@angular/core';
 						</svg>
 					</a>
 					<a
-						href="https://instagram.com/demchuk_denys"
+						[href]="instagramUrl"
 						target="_blank"
 						rel="noopener"
 						class="w-12 h-12 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
@@ -36,7 +37,7 @@ import { Component } from '@angular/core';
 						</svg>
 					</a>
 					<a
-						href="https://t.me/Demchukdv"
+						[href]="telegramUrl"
 						target="_blank"
 						rel="noopener"
 						class="w-12 h-12 bg-[#2AABEE] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
@@ -49,7 +50,7 @@ import { Component } from '@angular/core';
 						</svg>
 					</a>
 					<a
-						href="tel:+380680278101"
+						[href]="phoneHref"
 						class="w-12 h-12 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
 						aria-label="Зателефонувати"
 					>
@@ -112,4 +113,8 @@ import { Component } from '@angular/core';
 })
 export class FloatingContactComponent {
 	open = false;
+	phoneHref = environment.phoneHref;
+	facebookUrl = environment.facebookUrl;
+	instagramUrl = environment.instagramUrl;
+	telegramUrl = environment.telegramUrl;
 }

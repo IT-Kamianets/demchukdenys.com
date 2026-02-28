@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-footer',
@@ -9,4 +10,9 @@ import { RouterLink } from '@angular/router';
 })
 export class FooterComponent {
 	currentYear = new Date().getFullYear();
+	phoneHref = environment.phoneHref;
+	phoneDisplay = environment.phoneDisplay;
+	facebookUrl = environment.facebookUrl;
+	instagramUrl = environment.instagramUrl;
+	telegramUrl = environment.telegramUrl;
 }

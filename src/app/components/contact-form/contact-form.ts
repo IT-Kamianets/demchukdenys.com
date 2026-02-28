@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-contact-form',
@@ -11,6 +12,8 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 })
 export class ContactFormComponent {
 	private _httpClient = inject(HttpClient);
+	contactPhoneHref = environment.phoneHref;
+	contactPhoneDisplay = environment.phoneDisplay;
 
 	name = '';
 	phone = '';

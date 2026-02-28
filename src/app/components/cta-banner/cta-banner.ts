@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-cta-banner',
@@ -20,7 +21,7 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 				</p>
 				<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
 					<a
-						href="tel:+380680278101"
+						[href]="phoneHref"
 						class="inline-flex items-center px-8 py-3 bg-dark text-white font-semibold rounded-lg hover:bg-dark-light transition-colors"
 					>
 						<svg
@@ -39,7 +40,7 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 						Зателефонувати
 					</a>
 					<a
-						href="https://t.me/Demchukdv"
+						[href]="telegramUrl"
 						target="_blank"
 						rel="noopener"
 						class="inline-flex items-center px-8 py-3 bg-white/80 text-dark font-semibold rounded-lg hover:bg-white transition-colors"
@@ -60,7 +61,7 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 						Написати в Telegram
 					</a>
 					<a
-						href="https://maps.app.goo.gl/d1p3ZbYg3zqaGmu18"
+						[href]="mapUrl"
 						target="_blank"
 						rel="noopener"
 						class="inline-flex items-center px-8 py-3 bg-white/80 text-dark font-semibold rounded-lg hover:bg-white transition-colors"
@@ -70,7 +71,7 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 								d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
 							/>
 						</svg>
-						вул. Івана Мазепи 51, Кам'янець-Подільський, Хмельницька область, 32306
+						{{ addressDisplay }}
 					</a>
 				</div>
 			</div>
@@ -78,4 +79,9 @@ import { ScrollAnimateDirective } from '../../directives/scroll-animate';
 	`,
 	styles: [],
 })
-export class CtaBannerComponent {}
+export class CtaBannerComponent {
+	phoneHref = environment.phoneHref;
+	telegramUrl = environment.telegramUrl;
+	mapUrl = environment.mapUrl;
+	addressDisplay = environment.addressDisplay;
+}
