@@ -42,7 +42,7 @@ import { environment } from '../../../environments/environment';
 					<a
 						[href]="telegramUrl"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						class="inline-flex items-center px-8 py-3 bg-white/80 text-dark font-semibold rounded-lg hover:bg-white transition-colors"
 					>
 						<svg
@@ -63,7 +63,7 @@ import { environment } from '../../../environments/environment';
 					<a
 						[href]="mapUrl"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						class="inline-flex items-center px-8 py-3 bg-white/80 text-dark font-semibold rounded-lg hover:bg-white transition-colors"
 					>
 						<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">

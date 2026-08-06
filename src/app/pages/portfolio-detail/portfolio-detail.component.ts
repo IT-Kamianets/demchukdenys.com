@@ -97,5 +97,10 @@ export class PortfolioDetailPage implements OnInit {
 			path: `portfolio/${this.item.id}`,
 			image: `/${this.item.image}`,
 		});
+		this.seo.setBreadcrumbs([
+			{ name: 'Головна', path: '' },
+			{ name: 'Портфоліо', path: 'portfolios' },
+			{ name: this.item.title, path: `portfolio/${this.item.id}` },
+		]);
 	}
 }

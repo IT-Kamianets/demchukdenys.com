@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
 				'Кухні, корпусні меблі та гардеробні системи на замовлення в Камʼянці-Подільському. Індивідуальний дизайн, замір і монтаж.',
 		});
 		this.seo.setBusinessSchema();
+		this.seo.setWebSiteSchema();
 		this.title.setTitle('Demchuk Denys - Кухні та меблі люкс якості');
 		this.meta.updateTag({
 			name: 'description',

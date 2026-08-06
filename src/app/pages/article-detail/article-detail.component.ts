@@ -90,5 +90,20 @@ export class ArticleDetailPage implements OnInit {
 			image: `/${this.article.image}`,
 			type: 'article',
 		});
+		const datePublished = ['2024-01-15', '2024-01-10', '2024-01-05', '2023-12-28', '2023-12-20', '2023-12-15'][
+			this.article.id - 1
+		];
+		this.seo.setArticleSchema({
+			title: this.article.title,
+			description: this.article.content.substring(0, 160),
+			path: `article/${this.article.id}`,
+			image: `/${this.article.image}`,
+			datePublished,
+		});
+		this.seo.setBreadcrumbs([
+			{ name: 'Головна', path: '' },
+			{ name: 'Статті', path: 'articles' },
+			{ name: this.article.title, path: `article/${this.article.id}` },
+		]);
 	}
 }

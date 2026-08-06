@@ -19,4 +19,5 @@ export const serverRoutes: ServerRoute[] = [
 			return [1, 2, 3, 4, 5, 6].map((id) => ({ id: String(id) }));
 		},
 	},
+	{ path: '**', renderMode: RenderMode.Client },
 ];

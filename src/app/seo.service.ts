@@ -3,7 +3,7 @@ import { inject, Service } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 const SITE_URL = 'https://demchukdenys.com';
-const DEFAULT_IMAGE = '/img/slider/k1.webp';
+const DEFAULT_IMAGE = '/og-preview.png';
 
 type PageSeo = {
 	title: string;
@@ -21,6 +21,10 @@ export class SeoService {
 
 	setPage(page: PageSeo): void {
 		queueMicrotask(() => this._applyPage(page));
+	}
+
+	setNoIndex(): void {
+		this._meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
 	}
 
 	private _applyPage({
@@ -107,5 +111,68 @@ export class SeoService {
 		}
 
 		script.textContent = JSON.stringify(schema);
+	}
+
+	setWebSiteSchema(): void {
+		this._setJsonLd('website-schema', {
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			name: 'Demchuk Denys',
+			url: SITE_URL,
+			inLanguage: 'uk-UA',
+		});
+	}
+
+	setArticleSchema({
+		title,
+		description,
+		path,
+		image,
+		datePublished,
+	}: {
+		title: string;
+		description: string;
+		path: string;
+		image: string;
+		datePublished: string;
+	}): void {
+		this._setJsonLd('article-schema', {
+			'@context': 'https://schema.org',
+			'@type': 'Article',
+			headline: title,
+			description,
+			image: new URL(image, `${SITE_URL}/`).href,
+			datePublished,
+			dateModified: datePublished,
+			mainEntityOfPage: new URL(path, `${SITE_URL}/`).href,
+			author: { '@type': 'Organization', name: 'Demchuk Denys' },
+			publisher: { '@type': 'Organization', name: 'Demchuk Denys' },
+		});
+	}
+
+	setBreadcrumbs(items: Array<{ name: string; path: string }>): void {
+		this._setJsonLd('breadcrumbs-schema', {
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: items.map((item, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				name: item.name,
+				item: new URL(item.path, `${SITE_URL}/`).href,
+			})),
+		});
+	}
+
+	private _setJsonLd(id: string, value: object): void {
+		let script = this._document.head.querySelector<HTMLScriptElement>(`#${id}`);
+
+		if (!script) {
+			script = this._document.createElement('script');
+			script.id = id;
+			script.type = 'application/ld+json';
+			this._document.head.appendChild(script);
+		}
+
+		script.textContent = JSON.stringify(value);
 	}
 }

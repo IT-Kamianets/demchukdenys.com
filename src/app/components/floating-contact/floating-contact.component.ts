@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
 					<a
 						[href]="facebookUrl"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						class="w-12 h-12 bg-[#1877F2] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
 						aria-label="Facebook"
 					>
@@ -25,7 +25,7 @@ import { environment } from '../../../environments/environment';
 					<a
 						[href]="instagramUrl"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						class="w-12 h-12 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
 						style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
 						aria-label="Instagram"
@@ -39,7 +39,7 @@ import { environment } from '../../../environments/environment';
 					<a
 						[href]="telegramUrl"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						class="w-12 h-12 bg-[#2AABEE] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
 						aria-label="Telegram"
 					>
