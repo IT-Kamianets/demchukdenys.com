@@ -1,14 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScrollAnimateDirective } from '../../directives/scroll-animate';
+import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 
 @Component({
 	selector: 'app-portfolio',
 	imports: [RouterLink, ScrollAnimateDirective],
-	templateUrl: './portfolio.html',
+	templateUrl: './portfolio.component.html',
 	styles: [],
 })
 export class PortfolioComponent implements OnInit, OnDestroy {
+	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 	currentSlide = 0;
 	private autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 	private touchStartX = 0;
@@ -46,28 +48,30 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 		},
 	];
 
-	ngOnInit() {
-		this.startAutoPlay();
+	ngOnInit(): void {
+		if (this._isBrowser) {
+			this.startAutoPlay();
+		}
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy(): void {
 		this.stopAutoPlay();
 	}
 
-	nextSlide() {
+	nextSlide(): void {
 		this.currentSlide = (this.currentSlide + 1) % this.portfolioItems.length;
 	}
 
-	prevSlide() {
+	prevSlide(): void {
 		this.currentSlide =
 			(this.currentSlide - 1 + this.portfolioItems.length) % this.portfolioItems.length;
 	}
 
-	onTouchStart(event: TouchEvent) {
+	onTouchStart(event: TouchEvent): void {
 		this.touchStartX = event.touches[0].clientX;
 	}
 
-	onTouchEnd(event: TouchEvent) {
+	onTouchEnd(event: TouchEvent): void {
 		const touchEndX = event.changedTouches[0].clientX;
 		const diff = this.touchStartX - touchEndX;
 
@@ -80,11 +84,11 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	startAutoPlay() {
+	startAutoPlay(): void {
 		this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000);
 	}
 
-	stopAutoPlay() {
+	stopAutoPlay(): void {
 		if (this.autoPlayInterval) {
 			clearInterval(this.autoPlayInterval);
 			this.autoPlayInterval = null;

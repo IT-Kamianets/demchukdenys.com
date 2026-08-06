@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ScrollAnimateDirective } from '../../directives/scroll-animate';
+import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 import { environment } from '../../../environments/environment';
 
 @Component({

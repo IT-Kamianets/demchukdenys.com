@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ScrollAnimateDirective } from '../../directives/scroll-animate';
-import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-children';
+import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
+import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-children.directive';
 
 @Component({
 	selector: 'app-testimonials',
@@ -97,7 +97,7 @@ export class TestimonialsComponent {
 		{
 			name: 'Dmytro Maksiuta',
 			initials: 'ДМ',
-			text: 'Вдячний Денису Демчуку за високоякісний стіл, який він виготовив для мене на замовлення. Його майстерність і увага до деталей дозволили отримати не лише функціональний, а й дуже стильний стіл для роботи за комп\'ютером.',
+			text: "Вдячний Денису Демчуку за високоякісний стіл, який він виготовив для мене на замовлення. Його майстерність і увага до деталей дозволили отримати не лише функціональний, а й дуже стильний стіл для роботи за комп'ютером.",
 			rating: 5,
 			project: 'Стіл на замовлення',
 		},

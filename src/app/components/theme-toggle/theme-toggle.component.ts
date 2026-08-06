@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({
 	selector: 'app-theme-toggle',
@@ -44,21 +45,30 @@ import { Component, OnInit } from '@angular/core';
 	`,
 })
 export class ThemeToggleComponent implements OnInit {
+	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 	isDark = false;
 
-	ngOnInit() {
+	ngOnInit(): void {
+		if (!this._isBrowser) {
+			return;
+		}
+
 		const saved = localStorage.getItem('theme');
 		this.isDark = saved === 'dark';
 		this.applyTheme();
 	}
 
-	toggle() {
+	toggle(): void {
+		if (!this._isBrowser) {
+			return;
+		}
+
 		this.isDark = !this.isDark;
 		localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
 		this.applyTheme();
 	}
 
-	private applyTheme() {
+	private applyTheme(): void {
 		document.documentElement.classList.toggle('dark', this.isDark);
 	}
 }

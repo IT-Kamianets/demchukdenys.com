@@ -1,12 +1,12 @@
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ThemeToggleComponent } from '../theme-toggle/theme-toggle';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-header',
 	imports: [RouterLink, RouterLinkActive, ThemeToggleComponent],
-	templateUrl: './header.html',
+	templateUrl: './header.component.html',
 	styles: [],
 })
 export class HeaderComponent {

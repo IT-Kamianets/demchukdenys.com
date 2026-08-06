@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-articles-page',
 	imports: [RouterLink],
-	templateUrl: './articles.html',
+	templateUrl: './articles.component.html',
 	styles: [],
 })
 export class ArticlesPage implements OnInit {
 	constructor(
 		private title: Title,
 		private meta: Meta,
+		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
+		this.seo.setPage({
+			title: 'Статті про меблі та дизайн інтерʼєру | Demchuk Denys',
+			description:
+				'Корисні статті про планування кухні, меблі на замовлення, організацію простору та дизайн інтерʼєру.',
+			path: 'articles',
+			image: '/img/article/k.webp',
+		});
 		this.title.setTitle('Статті та новини - Demchuk Denys');
 		this.meta.updateTag({
 			name: 'description',

@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 @Component({
 	selector: 'app-hero',
 	imports: [FormsModule],
-	templateUrl: './hero.html',
+	templateUrl: './hero.component.html',
 	styles: [],
 })
 export class HeroComponent {

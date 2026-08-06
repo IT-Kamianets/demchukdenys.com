@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 @Component({
 	selector: 'app-footer',
 	imports: [RouterLink],
-	templateUrl: './footer.html',
+	templateUrl: './footer.component.html',
 	styles: [],
 })
 export class FooterComponent {

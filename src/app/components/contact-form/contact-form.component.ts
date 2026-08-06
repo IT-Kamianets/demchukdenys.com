@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ScrollAnimateDirective } from '../../directives/scroll-animate';
+import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-contact-form',
 	imports: [FormsModule, ScrollAnimateDirective],
-	templateUrl: './contact-form.html',
+	templateUrl: './contact-form.component.html',
 	styles: [],
 })
 export class ContactFormComponent {
@@ -22,20 +22,22 @@ export class ContactFormComponent {
 	message = '';
 	submitted = false;
 
-	onSubmit() {
-		if (this.name.trim() && this.phone.trim()) {
-			this.submitted = true;
+	onSubmit(): void {
+		if (!this.name.trim() || !this.phone.trim()) {
+			return;
 		}
 
 		this._httpClient
-			.post('https://api.webart.work/api/bot/message', {
-				chatid: '-5135274845',
+			.post<boolean>('https://api.webart.work/api/telegram/contact', {
 				message: `Ім'я: ${this.name}\nТелефон: ${this.phone}\nEmail: ${this.email}\nАдреса: ${this.address}\nПовідомлення: ${this.message}`,
 			})
-			.subscribe();
+			.subscribe({
+				next: () => (this.submitted = true),
+				error: (error: unknown) => console.error('Telegram contact request failed', error),
+			});
 	}
 
-	resetForm() {
+	resetForm(): void {
 		this.name = '';
 		this.phone = '';
 		this.email = '';

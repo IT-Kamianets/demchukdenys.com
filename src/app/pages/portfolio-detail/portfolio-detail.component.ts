@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LightboxComponent } from '../../components/lightbox/lightbox';
+import { LightboxComponent } from '../../components/lightbox/lightbox.component';
+import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-portfolio-detail',
 	imports: [RouterLink, LightboxComponent],
-	templateUrl: './portfolio-detail.html',
+	templateUrl: './portfolio-detail.component.html',
 	styles: [],
 })
 export class PortfolioDetailPage implements OnInit {
@@ -74,6 +75,7 @@ export class PortfolioDetailPage implements OnInit {
 		private route: ActivatedRoute,
 		private title: Title,
 		private meta: Meta,
+		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
@@ -88,6 +90,12 @@ export class PortfolioDetailPage implements OnInit {
 		this.meta.updateTag({
 			property: 'og:description',
 			content: this.item.fullDescription.substring(0, 160),
+		});
+		this.seo.setPage({
+			title: `${this.item.title} | Demchuk Denys`,
+			description: this.item.fullDescription.substring(0, 160),
+			path: `portfolio/${this.item.id}`,
+			image: `/${this.item.image}`,
 		});
 	}
 }

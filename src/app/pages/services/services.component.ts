@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-services-page',
 	imports: [RouterLink],
-	templateUrl: './services.html',
+	templateUrl: './services.component.html',
 	styles: [],
 })
 export class ServicesPage implements OnInit {
 	constructor(
 		private title: Title,
 		private meta: Meta,
+		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
+		this.seo.setPage({
+			title: 'Послуги з виготовлення меблів на замовлення | Demchuk Denys',
+			description:
+				'Проєктуємо та виготовляємо кухні, корпусні меблі й гардеробні системи. Замір, дизайн, доставка та монтаж у Камʼянці-Подільському.',
+			path: 'services',
+			image: '/img/services/k4.webp',
+		});
 		this.title.setTitle('Послуги - Demchuk Denys');
 		this.meta.updateTag({
 			name: 'description',

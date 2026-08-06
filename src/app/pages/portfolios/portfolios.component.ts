@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-portfolios',
 	imports: [RouterLink],
-	templateUrl: './portfolios.html',
+	templateUrl: './portfolios.component.html',
 	styles: [],
 })
 export class PortfoliosPage implements OnInit {
 	constructor(
 		private title: Title,
 		private meta: Meta,
+		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
+		this.seo.setPage({
+			title: 'Портфоліо меблів на замовлення | Demchuk Denys',
+			description:
+				'Портфоліо кухонь, спалень, корпусних меблів і гардеробних систем, виготовлених Demchuk Denys у Камʼянці-Подільському.',
+			path: 'portfolios',
+			image: '/img/slider/k1.webp',
+		});
 		this.title.setTitle('Портфоліо - Demchuk Denys');
 		this.meta.updateTag({
 			name: 'description',

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-article-detail',
 	imports: [RouterLink],
-	templateUrl: './article-detail.html',
+	templateUrl: './article-detail.component.html',
 	styles: [],
 })
 export class ArticleDetailPage implements OnInit {
@@ -66,6 +67,7 @@ export class ArticleDetailPage implements OnInit {
 		private route: ActivatedRoute,
 		private title: Title,
 		private meta: Meta,
+		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
@@ -80,6 +82,13 @@ export class ArticleDetailPage implements OnInit {
 		this.meta.updateTag({
 			property: 'og:description',
 			content: this.article.content.substring(0, 160),
+		});
+		this.seo.setPage({
+			title: `${this.article.title} | Demchuk Denys`,
+			description: this.article.content.substring(0, 160),
+			path: `article/${this.article.id}`,
+			image: `/${this.article.image}`,
+			type: 'article',
 		});
 	}
 }

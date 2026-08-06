@@ -1,15 +1,29 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+	Directive,
+	ElementRef,
+	inject,
+	Input,
+	OnDestroy,
+	OnInit,
+	PLATFORM_ID,
+} from '@angular/core';
 
 @Directive({
 	selector: '[appScrollAnimateChildren]',
 })
 export class ScrollAnimateChildrenDirective implements OnInit, OnDestroy {
 	@Input() staggerDelay = 100;
-	private observer!: IntersectionObserver;
+	private readonly _isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+	private observer?: IntersectionObserver;
 
 	constructor(private el: ElementRef<HTMLElement>) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
+		if (!this._isBrowser) {
+			return;
+		}
+
 		const container = this.el.nativeElement;
 
 		this.observer = new IntersectionObserver(
@@ -27,7 +41,7 @@ export class ScrollAnimateChildrenDirective implements OnInit, OnDestroy {
 								child.style.transform = 'translateY(0)';
 							});
 						});
-						this.observer.unobserve(container);
+						this.observer?.unobserve(container);
 					}
 				});
 			},
@@ -44,7 +58,7 @@ export class ScrollAnimateChildrenDirective implements OnInit, OnDestroy {
 		this.observer.observe(container);
 	}
 
-	ngOnDestroy() {
-		this.observer.disconnect();
+	ngOnDestroy(): void {
+		this.observer?.disconnect();
 	}
 }
