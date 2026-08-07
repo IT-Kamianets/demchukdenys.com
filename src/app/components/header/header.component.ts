@@ -14,6 +14,7 @@ export class HeaderComponent {
 	facebookUrl = environment.facebookUrl;
 	instagramUrl = environment.instagramUrl;
 	telegramUrl = environment.telegramUrl;
+	chatGptUrl = environment.chatGptUrl;
 
 	@HostListener('window:scroll')
 	onScroll() {

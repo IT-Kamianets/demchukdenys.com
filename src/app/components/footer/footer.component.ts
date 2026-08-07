@@ -15,4 +15,5 @@ export class FooterComponent {
 	facebookUrl = environment.facebookUrl;
 	instagramUrl = environment.instagramUrl;
 	telegramUrl = environment.telegramUrl;
+	chatGptUrl = environment.chatGptUrl;
 }
