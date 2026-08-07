@@ -10,7 +10,7 @@
 			</a>
 
 			<!-- Desktop Navigation -->
-			<nav class="hidden lg:flex items-center space-x-8">
+			<nav class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8">
 				<a
 					routerLink="/articles"
 					class="text-sm uppercase tracking-widest text-gray-300 hover:text-beige transition-colors"
@@ -32,7 +32,7 @@
 			</nav>
 
 			<!-- Desktop Social / Contact -->
-			<div class="hidden lg:flex items-center space-x-4">
+			<div class="hidden lg:flex items-center space-x-4 ml-auto">
 				<a
 					[href]="telegramUrl"
 					target="_blank"
@@ -60,9 +60,6 @@
 				>
 					<img src="img/social/4.svg" alt="Instagram" class="w-5 h-5 invert" />
 				</a>
-				<div class="border-l border-gray-700 pl-4 ml-2">
-					<app-theme-toggle />
-				</div>
 			</div>
 
 			<!-- Mobile: Nav centered -->
@@ -88,11 +85,6 @@
 					>Послуги</a
 				>
 			</nav>
-
-			<!-- Mobile: Theme toggle -->
-			<div class="lg:hidden self-center">
-				<app-theme-toggle />
-			</div>
 		</div>
 	</div>
 </header>

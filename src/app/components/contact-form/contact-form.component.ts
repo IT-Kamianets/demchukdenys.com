@@ -28,7 +28,7 @@ export class ContactFormComponent {
 		}
 
 		this._httpClient
-			.post<boolean>('https://api.webart.work/api/telegram/contact', {
+			.post<boolean>('https://it.webart.work/api/telegram/contact', {
 				message: `Ім'я: ${this.name}\nТелефон: ${this.phone}\nEmail: ${this.email}\nАдреса: ${this.address}\nПовідомлення: ${this.message}`,
 			})
 			.subscribe({
