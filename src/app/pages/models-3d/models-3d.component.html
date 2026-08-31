@@ -20,57 +20,17 @@
 
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 		<!-- 3D viewer (Three.js) -->
-		<div
-			#viewerContainer
-			class="model-viewer-box relative rounded-2xl overflow-hidden bg-white dark:bg-dark-light shadow-sm aspect-[16/9] lg:aspect-[21/9]"
-		>
-			<div #viewer class="absolute inset-0"></div>
-
-			@if (models.length) {
-				<button
-					type="button"
-					(click)="toggleFullscreen()"
-					class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-dark/60 hover:bg-dark/80 text-white transition-colors backdrop-blur-sm"
-					[attr.aria-label]="isFullscreen() ? 'Вийти з повноекранного режиму' : 'На весь екран'"
-				>
-					@if (!isFullscreen()) {
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"
-							/>
-						</svg>
-					} @else {
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M9 3v4a1 1 0 01-1 1H4M20 8h-4a1 1 0 01-1-1V3m1 14h4M3 16h4a1 1 0 011 1v4m6-5h4a1 1 0 011 1v4"
-							/>
-						</svg>
-					}
-				</button>
-			}
-
-			@if (!models.length) {
-				<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
-					<p class="text-gray-500 dark:text-gray-400 max-w-xl">
-						3D-моделі скоро з'являться тут. Слідкуйте за оновленнями.
-					</p>
-				</div>
-			} @else if (loading()) {
-				<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-					<div
-						class="w-10 h-10 border-4 border-beige/30 border-t-beige rounded-full animate-spin"
-					></div>
-				</div>
-			} @else if (loadError()) {
-				<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
-					<p class="text-red-400">Не вдалося завантажити модель. Спробуйте іншу.</p>
-				</div>
-			}
-		</div>
+		@if (activeModel(); as model) {
+			<app-model-viewer [src]="model.src" />
+		} @else {
+			<div
+				class="relative rounded-2xl overflow-hidden bg-white dark:bg-dark-light shadow-sm aspect-[16/9] lg:aspect-[21/9] flex items-center justify-center px-6 text-center"
+			>
+				<p class="text-gray-500 dark:text-gray-400 max-w-xl">
+					3D-моделі скоро з'являться тут. Слідкуйте за оновленнями.
+				</p>
+			</div>
+		}
 
 		<!-- Model picker -->
 		@if (models.length) {
@@ -95,6 +55,19 @@
 				<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mt-4 max-w-2xl">
 					{{ model.description }}
 				</p>
+				<a
+					routerLink="/kitchen-calculator"
+					class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-beige-dark hover:text-dark dark:hover:text-white transition-colors"
+				>
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M9 7h6m-6 4h6m-6 4h3M5 3h14a1 1 0 011 1v16a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"
+						/>
+					</svg>
+					Розрахувати конструктив цієї кухні
+				</a>
 				@if (model.credit) {
 					<p class="text-gray-400 dark:text-gray-500 text-xs mt-2">
 						Автор моделі:

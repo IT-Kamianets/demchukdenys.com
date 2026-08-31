@@ -1,0 +1,798 @@
+<section class="bg-warm-white dark:bg-dark min-h-screen">
+	<!-- Page header -->
+	<div class="bg-dark py-16 lg:py-20 relative overflow-hidden">
+		<div
+			class="absolute inset-0 opacity-10"
+			style="
+				background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23d3c9b7&quot; fill-opacity=&quot;0.3&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+			"
+		></div>
+		<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<span class="text-xs uppercase tracking-widest text-beige font-semibold mb-3 block"
+				>Технічний розрахунок</span
+			>
+			<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Конструктив</h1>
+			<p class="text-gray-400 max-w-2xl mx-auto">
+				Розбивка кухні по кожній шафі: боковини, дно, полиці, фасади та задня стінка на основі
+				<a routerLink="/3d-models" class="underline hover:text-beige">3D-моделі</a>.
+			</p>
+		</div>
+	</div>
+
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+		<!-- Generation panel -->
+		<div class="bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-8 shadow-sm">
+			<h2 class="text-lg font-bold text-dark dark:text-white mb-6">Швидка генерація шаф</h2>
+
+			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Довж. нижніх, м</span
+					>
+					<input
+						type="number"
+						step="0.1"
+						min="0"
+						[value]="lengthBase()"
+						(input)="onNumberInput(lengthBase, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Довж. верхніх, м</span
+					>
+					<input
+						type="number"
+						step="0.1"
+						min="0"
+						[value]="lengthWall()"
+						(input)="onNumberInput(lengthWall, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Вис. нижніх, мм</span
+					>
+					<input
+						type="number"
+						step="10"
+						min="0"
+						[value]="heightBase()"
+						(input)="onNumberInput(heightBase, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Вис. верхніх, мм</span
+					>
+					<input
+						type="number"
+						step="10"
+						min="0"
+						[value]="heightWall()"
+						(input)="onNumberInput(heightWall, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Глиб. нижніх, мм</span
+					>
+					<input
+						type="number"
+						step="10"
+						min="0"
+						[value]="depthBase()"
+						(input)="onNumberInput(depthBase, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Глиб. верхніх, мм</span
+					>
+					<input
+						type="number"
+						step="10"
+						min="0"
+						[value]="depthWall()"
+						(input)="onNumberInput(depthWall, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+			</div>
+
+			<div class="flex flex-wrap items-end gap-4 mt-4">
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Ширина модуля, мм</span
+					>
+					<input
+						type="number"
+						step="50"
+						min="1"
+						[value]="moduleWidth()"
+						(input)="onNumberInput(moduleWidth, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<label class="block">
+					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						>Товщина ЛДСП, мм</span
+					>
+					<input
+						type="number"
+						step="1"
+						min="1"
+						[value]="thickness()"
+						(input)="onNumberInput(thickness, $event)"
+						class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					/>
+				</label>
+				<button
+					type="button"
+					(click)="generateCabinets()"
+					class="px-5 py-2.5 rounded-full bg-beige text-dark text-sm font-semibold hover:bg-beige-dark transition-colors"
+				>
+					Згенерувати рівні модулі
+				</button>
+				<button
+					type="button"
+					(click)="loadKitchenPreset()"
+					class="px-5 py-2.5 rounded-full bg-dark text-white text-sm font-semibold hover:bg-dark/80 transition-colors"
+				>
+					Завантажити приклад цієї кухні
+				</button>
+			</div>
+			<p class="text-gray-500 dark:text-gray-400 text-xs mt-3">
+				"Приклад цієї кухні" — набір шаф, наближений до
+				<a routerLink="/3d-models" class="underline hover:text-beige-dark">3D-моделі</a>: з нішами
+				під духову шафу, варильну поверхню, мікрохвильову піч і витяжку, шухлядами та кутовими
+				відкритими полицями. Обидві кнопки замінюють поточний список — після цього кожну шафу можна
+				відредагувати окремо.
+			</p>
+		</div>
+
+		<!-- Schematic elevation -->
+		@if (schema().items.length) {
+			<div class="bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-8 shadow-sm mt-6">
+				<h2 class="text-lg font-bold text-dark dark:text-white mb-1">Схема (фасадна розгортка)</h2>
+				<p class="text-gray-500 dark:text-gray-400 text-xs mb-4">
+					Технічне креслення на основі введених розмірів (не фотографічна копія — 3D-модель не
+					містить розбивки на окремі шафи). Верхній ряд — навісні шафи, нижній — підлогові,
+					висока колона — пенал з технікою. Пунктир — відкриті секції та ніші під техніку (з
+					іконкою духовки/НВЧ/витяжки). Кружечки над стільницею — конфорки. Клік по шафі
+					перемикає на її картку в списку деталізації нижче.
+				</p>
+				<div class="overflow-x-auto pb-2">
+					<svg
+						[attr.viewBox]="'0 0 ' + schema().width + ' ' + schema().height"
+						[attr.width]="schema().width"
+						[attr.height]="schema().height"
+						class="block"
+					>
+						<line
+							x1="0"
+							[attr.y1]="schema().floorY"
+							[attr.x2]="schema().width"
+							[attr.y2]="schema().floorY"
+							class="stroke-gray-300 dark:stroke-gray-700"
+							stroke-width="2"
+						/>
+						@for (item of schema().items; track item.index) {
+							<g
+								(click)="scrollToCabinet(item.cabinet.id)"
+								class="cursor-pointer"
+								[class.opacity-100]="highlightedId() === item.cabinet.id"
+							>
+								<!-- Карниз (декоративний виступ) над навісною шафою / пеналом -->
+								@if (item.type === 'wall' || item.type === 'tall') {
+									<rect
+										[attr.x]="item.x - 3"
+										[attr.y]="item.y - schema().cornicesY"
+										[attr.width]="item.w + 6"
+										[attr.height]="schema().cornicesY"
+										class="fill-dark/10 dark:fill-white/10 stroke-dark dark:stroke-white"
+										stroke-width="1"
+									/>
+								}
+								<rect
+									[attr.x]="item.x"
+									[attr.y]="item.y"
+									[attr.width]="item.w"
+									[attr.height]="item.h"
+									[attr.fill]="highlightedId() === item.cabinet.id ? 'rgba(211,201,183,0.35)' : 'none'"
+									[attr.stroke-dasharray]="item.dashed ? '5,4' : null"
+									class="stroke-dark dark:stroke-white"
+									stroke-width="1.5"
+								/>
+								@for (line of item.dividers; track $index) {
+									<line
+										[attr.x1]="line.x1"
+										[attr.y1]="line.y1"
+										[attr.x2]="line.x2"
+										[attr.y2]="line.y2"
+										class="stroke-dark dark:stroke-white"
+										stroke-width="1"
+									/>
+								}
+								<!-- Сегменти пенала (двері/шухляди/ніша на кожному рівні колони) -->
+								@for (seg of item.segments; track $index) {
+									@if (seg.dashed) {
+										<rect
+											[attr.x]="item.x + 2"
+											[attr.y]="seg.y + 2"
+											[attr.width]="item.w - 4"
+											[attr.height]="seg.h - 4"
+											fill="none"
+											stroke-dasharray="4,3"
+											class="stroke-dark dark:stroke-white"
+											stroke-width="1"
+										/>
+									}
+									@for (line of seg.dividers; track $index) {
+										<line
+											[attr.x1]="line.x1"
+											[attr.y1]="line.y1"
+											[attr.x2]="line.x2"
+											[attr.y2]="line.y2"
+											class="stroke-dark dark:stroke-white"
+											stroke-width="1"
+										/>
+									}
+									@for (line of seg.handles; track $index) {
+										<line
+											[attr.x1]="line.x1"
+											[attr.y1]="line.y1"
+											[attr.x2]="line.x2"
+											[attr.y2]="line.y2"
+											class="stroke-beige-dark"
+											stroke-width="2"
+										/>
+									}
+									@if (seg.applianceIcon; as icon) {
+										@for (r of icon.rects; track $index) {
+											<rect
+												[attr.x]="r.x"
+												[attr.y]="r.y"
+												[attr.width]="r.w"
+												[attr.height]="r.h"
+												[attr.rx]="r.rx"
+												fill="none"
+												class="stroke-dark dark:stroke-white"
+												stroke-width="1.2"
+											/>
+										}
+										@for (c of icon.circles; track $index) {
+											<circle
+												[attr.cx]="c.cx"
+												[attr.cy]="c.cy"
+												[attr.r]="c.r"
+												class="fill-dark dark:fill-white"
+											/>
+										}
+									}
+									@if (seg.label) {
+										<text
+											[attr.x]="item.x + item.w / 2"
+											[attr.y]="seg.y + seg.h / 2 + 3"
+											text-anchor="middle"
+											class="fill-gray-500 dark:fill-gray-400"
+											font-size="8"
+										>
+											{{ seg.label }}
+										</text>
+									}
+								}
+								@for (line of item.handles; track $index) {
+									<line
+										[attr.x1]="line.x1"
+										[attr.y1]="line.y1"
+										[attr.x2]="line.x2"
+										[attr.y2]="line.y2"
+										class="stroke-beige-dark"
+										stroke-width="2"
+									/>
+								}
+								<!-- Виріз під мийку + простір під сифон -->
+								@if (item.sinkCutout; as sink) {
+									<rect
+										[attr.x]="sink.x"
+										[attr.y]="sink.y"
+										[attr.width]="sink.w"
+										[attr.height]="sink.h"
+										rx="4"
+										fill="none"
+										stroke-dasharray="3,3"
+										class="stroke-beige-dark"
+										stroke-width="1.5"
+									/>
+									<line
+										[attr.x1]="item.x + 6"
+										[attr.y1]="item.y + item.h - 8"
+										[attr.x2]="item.x + item.w - 6"
+										[attr.y2]="item.y + item.h - 8"
+										stroke-dasharray="2,3"
+										class="stroke-beige-dark"
+										stroke-width="1"
+									/>
+									<text
+										[attr.x]="item.x + item.w / 2"
+										[attr.y]="item.y + item.h - 12"
+										text-anchor="middle"
+										class="fill-beige-dark"
+										font-size="8"
+									>
+										сифон
+									</text>
+								}
+								<!-- Конфорки варильної поверхні (на стільниці, над шафою) -->
+								@for (dot of item.cooktopDots; track $index) {
+									<circle
+										[attr.cx]="dot.cx"
+										[attr.cy]="dot.cy"
+										[attr.r]="dot.r"
+										fill="none"
+										class="stroke-dark dark:stroke-white"
+										stroke-width="1.5"
+									/>
+								}
+								<!-- Іконка вбудованої техніки (духовка/мікрохвильовка/витяжка) -->
+								@if (item.applianceIcon; as icon) {
+									@for (r of icon.rects; track $index) {
+										<rect
+											[attr.x]="r.x"
+											[attr.y]="r.y"
+											[attr.width]="r.w"
+											[attr.height]="r.h"
+											[attr.rx]="r.rx"
+											fill="none"
+											class="stroke-dark dark:stroke-white"
+											stroke-width="1.2"
+										/>
+									}
+									@for (c of icon.circles; track $index) {
+										<circle
+											[attr.cx]="c.cx"
+											[attr.cy]="c.cy"
+											[attr.r]="c.r"
+											class="fill-dark dark:fill-white"
+										/>
+									}
+								}
+								<!-- Номер шафи (бейдж у верхньому лівому куті) -->
+								<circle
+									[attr.cx]="item.x + 11"
+									[attr.cy]="item.y + 11"
+									r="9"
+									class="fill-dark dark:fill-white"
+								/>
+								<text
+									[attr.x]="item.x + 11"
+									[attr.y]="item.y + 11"
+									text-anchor="middle"
+									dominant-baseline="central"
+									class="fill-white dark:fill-dark"
+									font-size="10"
+									font-weight="700"
+								>
+									{{ item.index }}
+								</text>
+								<!-- Підпис під схемою -->
+								<text
+									[attr.x]="item.x + item.w / 2"
+									[attr.y]="schema().floorY + (item.type === 'wall' ? 20 : 38)"
+									text-anchor="middle"
+									class="fill-dark dark:fill-white"
+									font-size="9"
+								>
+									№{{ item.index }}
+								</text>
+								<text
+									[attr.x]="item.x + item.w / 2"
+									[attr.y]="schema().floorY + (item.type === 'wall' ? 32 : 50)"
+									text-anchor="middle"
+									class="fill-gray-500 dark:fill-gray-400"
+									font-size="8"
+								>
+									{{ captionFor(item.cabinet) }}
+								</text>
+								<!-- Позначка повороту за кут -->
+								@if (item.cornerAfter) {
+									<line
+										[attr.x1]="item.cornerX + 6"
+										y1="0"
+										[attr.x2]="item.cornerX + 6"
+										[attr.y2]="schema().floorY"
+										stroke-dasharray="2,4"
+										class="stroke-red-400"
+										stroke-width="1.5"
+									/>
+									<text
+										[attr.x]="item.cornerX + 6"
+										y="12"
+										text-anchor="middle"
+										class="fill-red-400"
+										font-size="9"
+										font-weight="700"
+									>
+										КУТ
+									</text>
+								}
+							</g>
+						}
+					</svg>
+				</div>
+				<p class="text-gray-500 dark:text-gray-400 text-xs mt-3">
+					Пунктирна червона лінія "КУТ" — місце повороту кухні на 90°. Заштрихований прямокутник
+					над навісними шафами — декоративний карниз. Пунктирний контур — виріз під мийку,
+					пунктирна лінія знизу — простір без дна під сифон.
+				</p>
+			</div>
+		}
+
+		<!-- Totals -->
+		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6">
+			<div class="bg-dark rounded-xl p-4 text-center">
+				<div class="text-white font-bold text-lg">{{ totalLength() | number: '1.1-1' }}</div>
+				<div class="text-gray-400 text-xs mt-1">довжина, м</div>
+			</div>
+			<div class="bg-dark rounded-xl p-4 text-center">
+				<div class="text-white font-bold text-lg">{{ cabinetsCount() }}</div>
+				<div class="text-gray-400 text-xs mt-1">шаф</div>
+			</div>
+			<div class="bg-dark rounded-xl p-4 text-center">
+				<div class="text-white font-bold text-lg">{{ totalFacadeArea() | number: '1.2-2' }}</div>
+				<div class="text-gray-400 text-xs mt-1">фасади, м²</div>
+			</div>
+			<div class="bg-dark rounded-xl p-4 text-center">
+				<div class="text-white font-bold text-lg">{{ totalLdspArea() | number: '1.2-2' }}</div>
+				<div class="text-gray-400 text-xs mt-1">ЛДСП корпус, м²</div>
+			</div>
+			<div class="bg-dark rounded-xl p-4 text-center">
+				<div class="text-white font-bold text-lg">{{ totalHdfArea() | number: '1.2-2' }}</div>
+				<div class="text-gray-400 text-xs mt-1">ХДФ (задня ст.), м²</div>
+			</div>
+			<div class="bg-dark rounded-xl p-4 text-center">
+				<div class="text-white font-bold text-lg">{{ totalEdgeLength() | number: '1.1-1' }}</div>
+				<div class="text-gray-400 text-xs mt-1">крайка, пог. м</div>
+			</div>
+		</div>
+
+		<!-- Cabinets list -->
+		<div class="mt-8 space-y-4">
+			@for (item of breakdown(); track item.cabinet.id; let i = $index) {
+				<div
+					[id]="'cabinet-' + item.cabinet.id"
+					class="bg-white dark:bg-dark-light rounded-2xl p-5 sm:p-6 shadow-sm transition-shadow duration-500"
+					[class.ring-2]="highlightedId() === item.cabinet.id"
+					[class.ring-beige]="highlightedId() === item.cabinet.id"
+				>
+					<div class="flex items-center justify-between mb-4">
+						<h3 class="font-bold text-dark dark:text-white">
+							@if (item.cabinet.type === 'tall') {
+								Шафа №{{ i + 1 }} — пенал ({{ item.cabinet.segments.length }} сегм.)
+							} @else {
+								Шафа №{{ i + 1 }} — {{ item.cabinet.type === 'base' ? 'нижня' : 'верхня' }}
+								@switch (item.cabinet.facadeType) {
+									@case ('doors') {, двері}
+									@case ('drawers') {, шухляди}
+									@case ('niche') {, ніша{{ item.cabinet.applianceLabel ? ' (' + item.cabinet.applianceLabel + ')' : '' }}}
+									@case ('open') {, відкриті полиці}
+								}
+							}
+						</h3>
+						<button
+							type="button"
+							(click)="removeCabinet(item.cabinet.id)"
+							class="text-gray-400 hover:text-red-400 transition-colors text-sm"
+						>
+							Видалити
+						</button>
+					</div>
+
+					<!-- Editable params -->
+					<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-3">
+						<label class="block">
+							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								>Ряд</span
+							>
+							<select
+								[value]="item.cabinet.type"
+								(change)="updateCabinet(item.cabinet.id, 'type', $event)"
+								class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+							>
+								<option value="base">Нижня</option>
+								<option value="wall">Верхня</option>
+								<option value="tall">Пенал (на всю висоту)</option>
+							</select>
+						</label>
+						@if (item.cabinet.type !== 'tall') {
+							<label class="block">
+								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									>Фасад</span
+								>
+								<select
+									[value]="item.cabinet.facadeType"
+									(change)="updateCabinet(item.cabinet.id, 'facadeType', $event)"
+									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+								>
+									<option value="doors">Двері</option>
+									<option value="drawers">Шухляди</option>
+									<option value="niche">Ніша під техніку</option>
+									<option value="open">Відкриті полиці</option>
+								</select>
+							</label>
+						}
+						<label class="block">
+							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								>Ширина, мм</span
+							>
+							<input
+								type="number"
+								[value]="item.cabinet.width"
+								(input)="updateCabinet(item.cabinet.id, 'width', $event)"
+								class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+							/>
+						</label>
+						@if (item.cabinet.type !== 'tall') {
+							<label class="block">
+								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									>Висота, мм</span
+								>
+								<input
+									type="number"
+									[value]="item.cabinet.height"
+									(input)="updateCabinet(item.cabinet.id, 'height', $event)"
+									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+								/>
+							</label>
+						}
+						<label class="block">
+							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								>Глибина, мм</span
+							>
+							<input
+								type="number"
+								[value]="item.cabinet.depth"
+								(input)="updateCabinet(item.cabinet.id, 'depth', $event)"
+								class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+							/>
+						</label>
+						@if (item.cabinet.type !== 'tall' && (item.cabinet.facadeType === 'doors' || item.cabinet.facadeType === 'drawers')) {
+							<label class="block">
+								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									>{{ item.cabinet.facadeType === 'doors' ? 'Дверей' : 'Шухляд' }}</span
+								>
+								<input
+									type="number"
+									min="1"
+									[value]="item.cabinet.facades"
+									(input)="updateCabinet(item.cabinet.id, 'facades', $event)"
+									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+								/>
+							</label>
+						}
+					</div>
+
+					@if (item.cabinet.type === 'tall') {
+						<div class="mb-5 space-y-2">
+							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								>Сегменти пенала (згори вниз)</span
+							>
+							@for (seg of item.cabinet.segments; track $index) {
+								<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 items-center bg-warm-white dark:bg-dark rounded-lg p-2">
+									<input
+										type="number"
+										min="50"
+										[value]="seg.height"
+										(input)="updateSegment(item.cabinet.id, $index, 'height', $event)"
+										placeholder="Висота, мм"
+										class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+									/>
+									<select
+										[value]="seg.facadeType"
+										(change)="updateSegment(item.cabinet.id, $index, 'facadeType', $event)"
+										class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+									>
+										<option value="doors">Двері</option>
+										<option value="drawers">Шухляди</option>
+										<option value="niche">Ніша під техніку</option>
+										<option value="open">Відкриті полиці</option>
+									</select>
+									@if (seg.facadeType === 'doors' || seg.facadeType === 'drawers') {
+										<input
+											type="number"
+											min="1"
+											[value]="seg.facades"
+											(input)="updateSegment(item.cabinet.id, $index, 'facades', $event)"
+											placeholder="К-сть"
+											class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+										/>
+									}
+									@if (seg.facadeType === 'niche') {
+										<input
+											type="text"
+											[value]="seg.applianceLabel"
+											(input)="updateSegment(item.cabinet.id, $index, 'applianceLabel', $event)"
+											placeholder="напр. Духова шафа"
+											class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige col-span-2"
+										/>
+									}
+									<button
+										type="button"
+										(click)="removeSegment(item.cabinet.id, $index)"
+										class="text-gray-400 hover:text-red-400 transition-colors text-xs justify-self-end"
+									>
+										Видалити
+									</button>
+								</div>
+							}
+							<button
+								type="button"
+								(click)="addSegment(item.cabinet.id)"
+								class="text-xs font-semibold text-beige-dark hover:text-dark dark:hover:text-white transition-colors"
+							>
+								+ Додати сегмент
+							</button>
+						</div>
+					}
+
+					<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-5">
+						@if (item.cabinet.type !== 'tall' && (item.cabinet.facadeType === 'open' || item.cabinet.facadeType === 'doors')) {
+							<label class="block">
+								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									>Полиць</span
+								>
+								<input
+									type="number"
+									min="0"
+									[value]="item.cabinet.shelves"
+									(input)="updateCabinet(item.cabinet.id, 'shelves', $event)"
+									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+								/>
+							</label>
+						}
+						@if (item.cabinet.type !== 'tall' && item.cabinet.facadeType === 'niche') {
+							<label class="block col-span-2">
+								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									>Техніка</span
+								>
+								<input
+									type="text"
+									placeholder="напр. Духова шафа"
+									[value]="item.cabinet.applianceLabel"
+									(input)="updateCabinet(item.cabinet.id, 'applianceLabel', $event)"
+									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+								/>
+							</label>
+						}
+						@if (item.cabinet.type === 'base' && item.cabinet.facadeType === 'doors') {
+							<label class="flex items-center gap-2 mt-5">
+								<input
+									type="checkbox"
+									[checked]="item.cabinet.hasSink"
+									(change)="updateCabinet(item.cabinet.id, 'hasSink', $event)"
+									class="w-4 h-4 accent-beige"
+								/>
+								<span class="text-xs text-gray-500 dark:text-gray-400">Мийка + сифон</span>
+							</label>
+							<label class="flex items-center gap-2 mt-5">
+								<input
+									type="checkbox"
+									[checked]="item.cabinet.hasCooktop"
+									(change)="updateCabinet(item.cabinet.id, 'hasCooktop', $event)"
+									class="w-4 h-4 accent-beige"
+								/>
+								<span class="text-xs text-gray-500 dark:text-gray-400">Варильна поверхня</span>
+							</label>
+						}
+						<label class="flex items-center gap-2 mt-5">
+							<input
+								type="checkbox"
+								[checked]="item.cabinet.cornerAfter"
+								(change)="updateCabinet(item.cabinet.id, 'cornerAfter', $event)"
+								class="w-4 h-4 accent-beige"
+							/>
+							<span class="text-xs text-gray-500 dark:text-gray-400">Кут після цієї шафи</span>
+						</label>
+					</div>
+
+					<!-- Parts table -->
+					<div class="overflow-x-auto">
+						<table class="w-full text-sm">
+							<thead>
+								<tr class="text-left text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider">
+									<th class="py-2 pr-4">Деталь</th>
+									<th class="py-2 pr-4">Розмір, мм (Ш × В/Г)</th>
+									<th class="py-2">К-сть</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for (part of item.parts; track part.name) {
+									<tr class="border-t border-gray-100 dark:border-gray-800">
+										<td class="py-2 pr-4 text-dark dark:text-white">{{ part.name }}</td>
+										<td class="py-2 pr-4 text-gray-500 dark:text-gray-400">{{ part.size }}</td>
+										<td class="py-2 text-gray-500 dark:text-gray-400">{{ part.qty }}</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+
+					<div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-gray-500 dark:text-gray-400 mt-4">
+						<span>ЛДСП корпус: {{ item.ldspArea | number: '1.2-2' }} м²</span>
+						<span>Фасади: {{ item.facadeArea | number: '1.2-2' }} м²</span>
+						<span>ХДФ: {{ item.hdfArea | number: '1.2-2' }} м²</span>
+						<span>Крайка: {{ item.edgeLength | number: '1.1-1' }} пог. м</span>
+					</div>
+				</div>
+			}
+
+			@if (!breakdown().length) {
+				<div class="text-center py-12 text-gray-500 dark:text-gray-400">
+					Список шаф порожній. Натисніть "Згенерувати список шаф" або додайте шафу вручну.
+				</div>
+			}
+		</div>
+
+		<div class="flex flex-wrap gap-3 justify-center mt-6">
+			<button
+				type="button"
+				(click)="addCabinet('base')"
+				class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-dark dark:text-white hover:bg-beige/20 transition-colors"
+			>
+				+ Додати нижню шафу
+			</button>
+			<button
+				type="button"
+				(click)="addCabinet('wall')"
+				class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-dark dark:text-white hover:bg-beige/20 transition-colors"
+			>
+				+ Додати верхню шафу
+			</button>
+			<button
+				type="button"
+				(click)="addCabinet('tall')"
+				class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-dark dark:text-white hover:bg-beige/20 transition-colors"
+			>
+				+ Додати пенал
+			</button>
+		</div>
+
+		<p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mt-8 max-w-2xl mx-auto text-center">
+			Загальні габарити приклада (довжина крил ≈ 3,41 м і 2,155 м, висота ≈ 2,1 м) виміряні напряму
+			з 3D-моделі. Сама модель не містить розбивки на окремі шафи — це вже потребує ручного
+			креслення — тож склад і типи кожної шафи (двері, шухляди, ніші під техніку, мийка) підібрані
+			за фотографією рендеру. Розрахунок технічний, за типовою конструкцією корпусної меблі
+			(боковини, дно, царги/верх, полиці, фасади/шухляди із зазором 3 мм, задня стінка з ХДФ, ніші
+			під техніку без фасаду). Він не враховує внутрішню фурнітуру шухляд (напрямні, короб) і не є
+			остаточним кресленням розкрою. Для точного проєкту замовте безкоштовний замір.
+		</p>
+
+		<div class="text-center mt-8">
+			<a
+				routerLink="/3d-models"
+				class="inline-flex items-center text-beige-dark font-semibold hover:text-dark transition-colors"
+			>
+				<svg
+					class="w-4 h-4 mr-2 rotate-180"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+					/>
+				</svg>
+				До 3D-моделі
+			</a>
+		</div>
+	</div>
+</section>

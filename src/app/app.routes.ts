@@ -40,6 +40,13 @@ export const routes: Routes = [
 			import('./pages/models-3d/models-3d.component').then((m) => m.Models3dPage),
 	},
 	{
+		path: 'kitchen-calculator',
+		loadComponent: () =>
+			import('./pages/kitchen-calculator/kitchen-calculator.component').then(
+				(m) => m.KitchenCalculatorPage,
+			),
+	},
+	{
 		path: '**',
 		loadComponent: () =>
 			import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
