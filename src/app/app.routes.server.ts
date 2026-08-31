@@ -11,6 +11,7 @@ export const serverRoutes: ServerRoute[] = [
 		},
 	},
 	{ path: 'services', renderMode: RenderMode.Prerender },
+	{ path: '3d-models', renderMode: RenderMode.Prerender },
 	{ path: 'articles', renderMode: RenderMode.Prerender },
 	{
 		path: 'article/:id',

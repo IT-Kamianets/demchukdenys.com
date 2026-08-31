@@ -1,0 +1,139 @@
+<section class="bg-warm-white dark:bg-dark min-h-screen">
+	<!-- Page header -->
+	<div class="bg-dark py-16 lg:py-20 relative overflow-hidden">
+		<div
+			class="absolute inset-0 opacity-10"
+			style="
+				background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23d3c9b7&quot; fill-opacity=&quot;0.3&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+			"
+		></div>
+		<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<span class="text-xs uppercase tracking-widest text-beige font-semibold mb-3 block"
+				>Інтерактивний перегляд</span
+			>
+			<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">3D-моделі меблів</h1>
+			<p class="text-gray-400 max-w-2xl mx-auto">
+				Обертайте, наближайте та розглядайте наші кухні й меблі у 3D з будь-якого боку.
+			</p>
+		</div>
+	</div>
+
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+		<!-- 3D viewer (Three.js) -->
+		<div
+			#viewerContainer
+			class="model-viewer-box relative rounded-2xl overflow-hidden bg-white dark:bg-dark-light shadow-sm aspect-[16/9] lg:aspect-[21/9]"
+		>
+			<div #viewer class="absolute inset-0"></div>
+
+			@if (models.length) {
+				<button
+					type="button"
+					(click)="toggleFullscreen()"
+					class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-dark/60 hover:bg-dark/80 text-white transition-colors backdrop-blur-sm"
+					[attr.aria-label]="isFullscreen() ? 'Вийти з повноекранного режиму' : 'На весь екран'"
+				>
+					@if (!isFullscreen()) {
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"
+							/>
+						</svg>
+					} @else {
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M9 3v4a1 1 0 01-1 1H4M20 8h-4a1 1 0 01-1-1V3m1 14h4M3 16h4a1 1 0 011 1v4m6-5h4a1 1 0 011 1v4"
+							/>
+						</svg>
+					}
+				</button>
+			}
+
+			@if (!models.length) {
+				<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
+					<p class="text-gray-500 dark:text-gray-400 max-w-xl">
+						3D-моделі скоро з'являться тут. Слідкуйте за оновленнями.
+					</p>
+				</div>
+			} @else if (loading()) {
+				<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+					<div
+						class="w-10 h-10 border-4 border-beige/30 border-t-beige rounded-full animate-spin"
+					></div>
+				</div>
+			} @else if (loadError()) {
+				<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
+					<p class="text-red-400">Не вдалося завантажити модель. Спробуйте іншу.</p>
+				</div>
+			}
+		</div>
+
+		<!-- Model picker -->
+		@if (models.length) {
+			<div class="flex flex-wrap gap-3 mt-6">
+				@for (model of models; track model.src) {
+					<button
+						type="button"
+						(click)="selectModel(model)"
+						class="px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+						[class]="
+							activeModel() === model
+								? 'bg-beige text-dark'
+								: 'bg-white dark:bg-dark-light text-gray-500 dark:text-gray-400 hover:text-dark dark:hover:text-white'
+						"
+					>
+						{{ model.title }}
+					</button>
+				}
+			</div>
+
+			@if (activeModel(); as model) {
+				<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mt-4 max-w-2xl">
+					{{ model.description }}
+				</p>
+				@if (model.credit) {
+					<p class="text-gray-400 dark:text-gray-500 text-xs mt-2">
+						Автор моделі:
+						@if (model.creditUrl) {
+							<a
+								[href]="model.creditUrl"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="underline hover:text-beige-dark"
+								>{{ model.credit }}</a
+							>
+						} @else {
+							{{ model.credit }}
+						}
+					</p>
+				}
+			}
+		}
+
+		<div class="text-center mt-12">
+			<a
+				routerLink="/"
+				class="inline-flex items-center text-beige-dark font-semibold hover:text-dark transition-colors"
+			>
+				<svg
+					class="w-4 h-4 mr-2 rotate-180"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+					/>
+				</svg>
+				На головну
+			</a>
+		</div>
+	</div>
+</section>

@@ -35,6 +35,11 @@ export const routes: Routes = [
 			),
 	},
 	{
+		path: '3d-models',
+		loadComponent: () =>
+			import('./pages/models-3d/models-3d.component').then((m) => m.Models3dPage),
+	},
+	{
 		path: '**',
 		loadComponent: () =>
 			import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
