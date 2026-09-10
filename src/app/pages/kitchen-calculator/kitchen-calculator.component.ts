@@ -1,7 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, WritableSignal, computed, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 import { SeoService } from '../../seo.service';
 
 type CabinetType = 'base' | 'wall' | 'tall';
@@ -87,7 +86,7 @@ const CORNICE_HEIGHT = 60; // висота декоративного карни
 
 @Component({
 	selector: 'app-kitchen-calculator-page',
-	imports: [RouterLink, DecimalPipe],
+	imports: [DecimalPipe],
 	templateUrl: './kitchen-calculator.component.html',
 	styles: [],
 })
