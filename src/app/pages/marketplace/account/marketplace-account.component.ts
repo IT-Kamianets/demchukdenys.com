@@ -1,23 +1,31 @@
-import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-type MockOrder = {
-	id: string;
-	date: string;
-	status: string;
-	total: number;
-};
+import { Order } from '../../../feature/marketplace/order.interface';
+import { OrderService } from '../../../feature/marketplace/order.service';
 
 @Component({
 	selector: 'app-marketplace-account',
-	imports: [RouterLink],
+	imports: [RouterLink, DatePipe],
 	templateUrl: './marketplace-account.component.html',
 	styles: [],
 })
-export class MarketplaceAccountPage {
-	customerName = 'Тестовий Клієнт';
-	orders: MockOrder[] = [
-		{ id: 'DEMO-0001', date: '01.09.2026', status: 'Прийнято в обробку', total: 49296 },
-		{ id: 'DEMO-0000', date: '12.08.2026', status: 'Доставлено', total: 18499 },
-	];
+export class MarketplaceAccountPage implements OnInit {
+	private readonly _orderService = inject(OrderService);
+
+	customerName = 'Особистий кабінет';
+	orders = signal<Order[]>([]);
+	loading = signal(true);
+
+	async ngOnInit(): Promise<void> {
+		try {
+			this.orders.set(await this._orderService.getAll());
+		} catch {
+			// Listing all orders requires the admin login (Firestore rules) — a signed-out
+			// visitor simply sees an empty history instead of a crash.
+			this.orders.set([]);
+		}
+
+		this.loading.set(false);
+	}
 }

@@ -76,6 +76,11 @@
 			"title": "Панель керування | Demchuk Denys",
 			"description": "Адміністрування каталогу.",
 			"robots": "noindex, nofollow"
+		},
+		"/login": {
+			"title": "Вхід для адміністратора | Demchuk Denys",
+			"description": "Вхід до панелі керування.",
+			"robots": "noindex, nofollow"
 		}
 	},
 	"structuredData": {

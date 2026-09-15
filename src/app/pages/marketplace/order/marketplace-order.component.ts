@@ -1,31 +1,36 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Order } from '../../../feature/marketplace/order.interface';
+import { OrderService } from '../../../feature/marketplace/order.service';
 import { SeoService } from '../../../seo.service';
 
 @Component({
-	selector: 'app-marketplace-order-confirmation',
+	selector: 'app-marketplace-order',
 	imports: [RouterLink],
-	templateUrl: './marketplace-order-confirmation.component.html',
+	templateUrl: './marketplace-order.component.html',
 	styles: [],
 })
-export class MarketplaceOrderConfirmationPage implements OnInit {
+export class MarketplaceOrderPage implements OnInit {
+	private readonly _route = inject(ActivatedRoute);
+	private readonly _orderService = inject(OrderService);
 	private readonly _seo = inject(SeoService);
 
-	orderNumber = 'DEMO-0001';
-	status = 'Прийнято в обробку';
-	items = [
-		{ title: 'Холодильник Nordic Steel 420', qty: 1, price: 32999 },
-		{ title: 'Витяжка Airo Slim 60', qty: 1, price: 9899 },
-		{ title: 'Змішувач Arc Steel', qty: 2, price: 3199 },
-	];
+	order = signal<Order | null | undefined>(undefined);
 
 	get total(): number {
-		return this.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+		const order = this.order();
+
+		return order?.items.reduce((sum, item) => sum + item.price * item.qty, 0) ?? 0;
 	}
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
+		const id = this._route.snapshot.paramMap.get('id') ?? '';
+		const order = await this._orderService.getById(id);
+
+		this.order.set(order);
+
 		this._seo.setPage({
-			title: `Замовлення ${this.orderNumber}`,
+			title: order ? `Замовлення ${order.id}` : 'Замовлення не знайдено',
 			description: 'Підтвердження замовлення.',
 			robots: 'noindex, nofollow',
 		});

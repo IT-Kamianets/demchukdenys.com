@@ -74,8 +74,8 @@ export const routes: Routes = [
 	{
 		path: 'product/:id',
 		loadComponent: () =>
-			import('./pages/marketplace/product-detail/marketplace-product-detail.component').then(
-				(m) => m.MarketplaceProductDetailPage,
+			import('./pages/marketplace/product/marketplace-product.component').then(
+				(m) => m.MarketplaceProductPage,
 			),
 	},
 	{
@@ -99,9 +99,9 @@ export const routes: Routes = [
 	{
 		path: 'order/:id',
 		loadComponent: () =>
-			import(
-				'./pages/marketplace/order-confirmation/marketplace-order-confirmation.component'
-			).then((m) => m.MarketplaceOrderConfirmationPage),
+			import('./pages/marketplace/order/marketplace-order.component').then(
+				(m) => m.MarketplaceOrderPage,
+			),
 	},
 	{
 		path: 'account',
@@ -110,6 +110,15 @@ export const routes: Routes = [
 		loadComponent: () =>
 			import('./pages/marketplace/account/marketplace-account.component').then(
 				(m) => m.MarketplaceAccountPage,
+			),
+	},
+	{
+		path: 'login',
+		canActivate: [MetaGuard],
+		data: { meta: buildRouteMeta(companyProfile, '/login') },
+		loadComponent: () =>
+			import('./pages/marketplace/login/marketplace-login.component').then(
+				(m) => m.MarketplaceLoginPage,
 			),
 	},
 	{

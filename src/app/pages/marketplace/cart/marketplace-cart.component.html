@@ -14,12 +14,11 @@
 				<div class="flex items-center gap-4 p-5 sm:p-6">
 					<img [src]="item.image" [alt]="item.title" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
 					<div class="flex-1 min-w-0">
-						<p class="text-dark dark:text-white font-semibold">{{ item.title }}</p>
-						<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{ item.subtitle }}</p>
+						<p class="text-dark dark:text-white font-semibold mb-2">{{ item.title }}</p>
 						<div class="flex items-center gap-2">
 							<button
 								type="button"
-								(click)="changeQty(item.id, -1)"
+								(click)="changeQty(item.id, -1, item.qty)"
 								class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-warm-white dark:hover:bg-dark transition-colors"
 							>
 								−
@@ -27,7 +26,7 @@
 							<span class="w-6 text-center text-sm text-dark dark:text-white">{{ item.qty }}</span>
 							<button
 								type="button"
-								(click)="changeQty(item.id, 1)"
+								(click)="changeQty(item.id, 1, item.qty)"
 								class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-warm-white dark:hover:bg-dark transition-colors"
 							>
 								+
@@ -54,7 +53,7 @@
 			<h2 class="text-lg font-bold text-dark dark:text-white mb-4">Разом</h2>
 			<div class="flex justify-between items-center mb-6">
 				<span class="text-gray-500 dark:text-gray-400">Сума</span>
-				<span class="text-2xl font-bold text-dark dark:text-white">{{ total }} грн</span>
+				<span class="text-2xl font-bold text-dark dark:text-white">{{ total() }} грн</span>
 			</div>
 
 			<a

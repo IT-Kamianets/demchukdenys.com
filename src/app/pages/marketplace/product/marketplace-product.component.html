@@ -51,6 +51,7 @@
 						</div>
 						<button
 							type="button"
+							(click)="addToCart()"
 							[disabled]="!product.inStock"
 							class="flex-1 sm:flex-none px-8 py-3 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
 						>

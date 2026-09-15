@@ -1,24 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../feature/firebase/auth.service';
+import { Order, ORDER_STATUSES } from '../../../feature/marketplace/order.interface';
+import { OrderService } from '../../../feature/marketplace/order.service';
+import { isValidUaPhone } from '../../../feature/marketplace/phone.util';
 import { Product } from '../../../feature/marketplace/product.interface';
 import { ProductsService } from '../../../feature/marketplace/products.service';
-
-type MockOrder = {
-	id: string;
-	customerName: string;
-	date: string;
-	status: string;
-	total: number;
-};
-
-export const ORDER_STATUSES = [
-	'Прийнято в обробку',
-	'Підтверджено',
-	'У виробництві',
-	'Готово до відправки',
-	'Доставлено',
-	'Скасовано',
-];
 
 type ProductForm = Omit<Product, 'specs'>;
 
@@ -34,29 +23,47 @@ const EMPTY_FORM: ProductForm = {
 };
 
 type OrderForm = {
-	id: string;
 	customerName: string;
-	date: string;
+	phone: string;
 	status: string;
 	total: number;
 };
 
-function todayDisplay(): string {
-	const today = new Date();
-	const day = String(today.getDate()).padStart(2, '0');
-	const month = String(today.getMonth() + 1).padStart(2, '0');
-
-	return `${day}.${month}.${today.getFullYear()}`;
+function emptyOrderForm(): OrderForm {
+	return { customerName: '', phone: '', status: ORDER_STATUSES[0], total: 0 };
 }
 
 @Component({
 	selector: 'app-marketplace-admin',
-	imports: [FormsModule],
+	imports: [FormsModule, DatePipe],
 	templateUrl: './marketplace-admin.component.html',
 	styles: [],
 })
-export class MarketplaceAdminPage {
+export class MarketplaceAdminPage implements OnInit {
 	private readonly _productsService = inject(ProductsService);
+	private readonly _orderService = inject(OrderService);
+	private readonly _auth = inject(AuthService);
+	private readonly _router = inject(Router);
+
+	currentUser = this._auth.user;
+
+	async ngOnInit(): Promise<void> {
+		const user = await this._auth.ready();
+
+		if (!user) {
+			void this._router.navigate(['/login']);
+			return;
+		}
+
+		this.ordersLoading.set(true);
+		this.orders.set(await this._orderService.getAll());
+		this.ordersLoading.set(false);
+	}
+
+	async logout(): Promise<void> {
+		await this._auth.signOutUser();
+		void this._router.navigate(['/login']);
+	}
 
 	tab = signal<'products' | 'orders'>('products');
 	products = this._productsService.products;
@@ -64,55 +71,60 @@ export class MarketplaceAdminPage {
 	form: ProductForm = { ...EMPTY_FORM };
 
 	statuses = ORDER_STATUSES;
-	orders = signal<MockOrder[]>([
-		{
-			id: 'DEMO-0001',
-			customerName: 'Тестовий Клієнт',
-			date: '01.09.2026',
-			status: 'Прийнято в обробку',
-			total: 49296,
-		},
-		{
-			id: 'DEMO-0000',
-			customerName: 'Тестовий Клієнт',
-			date: '12.08.2026',
-			status: 'Доставлено',
-			total: 18499,
-		},
-	]);
+	orders = signal<Order[]>([]);
+	ordersLoading = signal(true);
 
 	creatingOrder = signal(false);
-	orderForm: OrderForm = this._emptyOrderForm();
+	orderForm: OrderForm = emptyOrderForm();
 
-	updateOrderStatus(id: string, event: Event): void {
+	get orderPhoneValid(): boolean {
+		return isValidUaPhone(this.orderForm.phone);
+	}
+
+	async updateOrderStatus(id: string, event: Event): Promise<void> {
 		const status = (event.target as HTMLSelectElement).value;
 
 		this.orders.update((list) => list.map((order) => (order.id === id ? { ...order, status } : order)));
+		await this._orderService.updateStatus(id, status);
 	}
 
 	startCreateOrder(): void {
 		this.creatingOrder.set(true);
-		this.orderForm = this._emptyOrderForm();
+		this.orderForm = emptyOrderForm();
 	}
 
 	cancelOrder(): void {
 		this.creatingOrder.set(false);
-		this.orderForm = this._emptyOrderForm();
+		this.orderForm = emptyOrderForm();
 	}
 
-	saveOrder(): void {
-		this.orders.update((list) => [{ ...this.orderForm }, ...list]);
+	async saveOrder(): Promise<void> {
+		if (!this.orderForm.customerName.trim() || !this.orderPhoneValid) {
+			return;
+		}
+
+		const id = await this._orderService.create({
+			customerName: this.orderForm.customerName.trim(),
+			phone: this.orderForm.phone.trim(),
+			items: [],
+			total: this.orderForm.total,
+			status: this.orderForm.status,
+			createdAt: Date.now(),
+		});
+
+		this.orders.update((list) => [
+			{
+				id,
+				customerName: this.orderForm.customerName.trim(),
+				phone: this.orderForm.phone.trim(),
+				items: [],
+				total: this.orderForm.total,
+				status: this.orderForm.status,
+				createdAt: Date.now(),
+			},
+			...list,
+		]);
 		this.cancelOrder();
-	}
-
-	private _emptyOrderForm(): OrderForm {
-		return {
-			id: `DEMO-${String(this.orders().length).padStart(4, '0')}`,
-			customerName: '',
-			date: todayDisplay(),
-			status: this.statuses[0],
-			total: 0,
-		};
 	}
 
 	startCreate(): void {

@@ -5,8 +5,25 @@ export interface AppLanguage {
 	htmlLang: string;
 }
 
+export interface FirebaseConfig {
+	apiKey: string;
+	authDomain: string;
+	projectId: string;
+	storageBucket: string;
+	messagingSenderId: string;
+	appId: string;
+}
+
 export const environment = {
 	production: true,
+	firebase: {
+		apiKey: 'AIzaSyCpwajPwyzDFJrhuwReQsKZ1hziTMnnu5A',
+		authDomain: 'demchuk-denys.firebaseapp.com',
+		projectId: 'demchuk-denys',
+		storageBucket: 'demchuk-denys.firebasestorage.app',
+		messagingSenderId: '783050969547',
+		appId: '1:783050969547:web:6f375a3034e3251d85264e',
+	} as FirebaseConfig,
 	phoneHref: 'tel:+380680278101',
 	phoneDisplay: '+38 (068) 027-81-01',
 	facebookUrl: 'https://www.facebook.com/denys.demchuk.2025',

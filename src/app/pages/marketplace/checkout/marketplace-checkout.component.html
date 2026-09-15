@@ -36,8 +36,12 @@
 					[(ngModel)]="phone"
 					name="phone"
 					required
+					placeholder="+380 67 123 45 67"
 					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige"
 				/>
+				@if (phone.trim() && !phoneValid) {
+					<p class="text-xs text-red-500 mt-1.5">Введіть дійсний український номер телефону.</p>
+				}
 			</div>
 
 			<div>
@@ -135,25 +139,30 @@
 		<aside class="bg-white dark:bg-dark-light rounded-2xl p-6 shadow-sm lg:sticky lg:top-24">
 			<h2 class="text-lg font-bold text-dark dark:text-white mb-4">Ваше замовлення</h2>
 			<div class="space-y-2 mb-4">
-				@for (item of items; track item.title) {
+				@for (item of items(); track item.id) {
 					<div class="flex justify-between text-sm">
 						<span class="text-dark dark:text-white">{{ item.title }} × {{ item.qty }}</span>
 						<span class="text-gray-500 dark:text-gray-400 whitespace-nowrap ml-3">{{ item.price * item.qty }} грн</span>
 					</div>
+				} @empty {
+					<p class="text-sm text-gray-400">Кошик порожній.</p>
 				}
 			</div>
 			<div class="flex justify-between items-center border-t border-gray-100 dark:border-gray-800 pt-4 mb-6">
 				<span class="text-gray-500 dark:text-gray-400">Разом</span>
-				<span class="text-2xl font-bold text-dark dark:text-white">{{ total }} грн</span>
+				<span class="text-2xl font-bold text-dark dark:text-white">{{ total() }} грн</span>
 			</div>
 			<button
 				type="button"
 				(click)="onSubmit()"
-				[disabled]="!name.trim() || !phone.trim()"
+				[disabled]="!name.trim() || !phoneValid || submitting || items().length === 0"
 				class="w-full px-6 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
 			>
-				Надіслати заявку
+				{{ submitting ? 'Надсилаємо...' : 'Надіслати заявку' }}
 			</button>
+			@if (error) {
+				<p class="text-sm text-red-500 mt-3">{{ error }}</p>
+			}
 		</aside>
 	</div>
 </section>

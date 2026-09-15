@@ -26,6 +26,17 @@ export const serverRoutes: ServerRoute[] = [
 		renderMode: RenderMode.Client,
 	},
 	{
+		// Auth state only exists in the browser (Firebase Auth). Prerendering/SSR would run the
+		// admin auth check with no user, baking a permanent "redirect to /login" into the static
+		// output — these must render purely client-side so the real, live session is checked.
+		path: 'admin',
+		renderMode: RenderMode.Client,
+	},
+	{
+		path: 'login',
+		renderMode: RenderMode.Client,
+	},
+	{
 		path: '**',
 		renderMode: RenderMode.Prerender,
 	},

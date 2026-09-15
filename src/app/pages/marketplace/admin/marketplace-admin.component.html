@@ -1,4 +1,5 @@
 <section class="bg-warm-white dark:bg-dark min-h-screen">
+	@if (currentUser(); as user) {
 	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-10 sm:pb-16">
 		<div class="flex items-center justify-between flex-wrap gap-4 mb-8">
 			<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white">Панель керування</h1>
@@ -36,8 +37,16 @@
 				>
 					Замовлення
 				</button>
+				<button
+					type="button"
+					(click)="logout()"
+					class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-gray-500 dark:text-gray-400 hover:text-red-400 transition-colors"
+				>
+					Вийти
+				</button>
 			</div>
 		</div>
+		<p class="text-xs text-gray-400 dark:text-gray-500 -mt-6 mb-8">{{ user.email }}</p>
 
 		@if (tab() === 'products') {
 			@if (editingId()) {
@@ -128,22 +137,21 @@
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<input
 							type="text"
-							[(ngModel)]="orderForm.id"
-							placeholder="Номер замовлення"
-							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
-						/>
-						<input
-							type="text"
 							[(ngModel)]="orderForm.customerName"
 							placeholder="Ім'я клієнта"
 							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 						/>
-						<input
-							type="text"
-							[(ngModel)]="orderForm.date"
-							placeholder="Дата (ДД.ММ.РРРР)"
-							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
-						/>
+						<div>
+							<input
+								type="tel"
+								[(ngModel)]="orderForm.phone"
+								placeholder="Телефон, напр. +380 67 123 45 67"
+								class="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+							/>
+							@if (orderForm.phone.trim() && !orderPhoneValid) {
+								<p class="text-xs text-red-500 mt-1">Введіть дійсний український номер телефону.</p>
+							}
+						</div>
 						<input
 							type="number"
 							[(ngModel)]="orderForm.total"
@@ -156,14 +164,15 @@
 						class="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 					>
 						@for (status of statuses; track status) {
-							<option [value]="status">{{ status }}</option>
+							<option [value]="status" class="bg-white text-dark dark:bg-dark-light dark:text-white">{{ status }}</option>
 						}
 					</select>
 					<div class="flex gap-3">
 						<button
 							type="button"
 							(click)="saveOrder()"
-							class="px-5 py-2 rounded-full bg-dark text-white dark:bg-beige dark:text-dark text-sm font-semibold"
+							[disabled]="!orderForm.customerName.trim() || !orderPhoneValid"
+							class="px-5 py-2 rounded-full bg-dark text-white dark:bg-beige dark:text-dark text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
 						>
 							Зберегти
 						</button>
@@ -182,8 +191,8 @@
 				@for (order of orders(); track order.id) {
 					<div class="flex flex-wrap items-center justify-between gap-3 p-5">
 						<div>
-							<p class="text-dark dark:text-white font-semibold">{{ order.id }}</p>
-							<p class="text-gray-500 dark:text-gray-400 text-sm">{{ order.customerName }} · {{ order.date }}</p>
+							<p class="text-dark dark:text-white font-semibold">{{ order.customerName }} · {{ order.id }}</p>
+							<p class="text-gray-500 dark:text-gray-400 text-sm">{{ order.createdAt | date: 'dd.MM.yyyy' }} @if (order.phone) { · {{ order.phone }} }</p>
 						</div>
 						<select
 							[value]="order.status"
@@ -191,13 +200,18 @@
 							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 						>
 							@for (status of statuses; track status) {
-								<option [value]="status">{{ status }}</option>
+								<option [value]="status" class="bg-white text-dark dark:bg-dark-light dark:text-white">{{ status }}</option>
 							}
 						</select>
 						<p class="text-dark dark:text-white font-bold">{{ order.total }} грн</p>
 					</div>
+				} @empty {
+					@if (!ordersLoading()) {
+						<div class="p-10 text-center text-gray-500 dark:text-gray-400">Замовлень поки немає.</div>
+					}
 				}
 			</div>
 		}
 	</div>
+	}
 </section>
