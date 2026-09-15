@@ -1,7 +1,6 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit, WritableSignal, computed, signal } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { SeoService } from '../../seo.service';
+import { Component, OnInit, WritableSignal, computed, inject, signal } from '@angular/core';
+import { TranslateDirective, TranslateService } from '@wawjs/ngx-translate';
 
 type CabinetType = 'base' | 'wall' | 'tall';
 type FacadeType = 'doors' | 'drawers' | 'niche' | 'open';
@@ -86,11 +85,16 @@ const CORNICE_HEIGHT = 60; // висота декоративного карни
 
 @Component({
 	selector: 'app-kitchen-calculator-page',
-	imports: [DecimalPipe],
+	imports: [DecimalPipe, TranslateDirective],
 	templateUrl: './kitchen-calculator.component.html',
 	styles: [],
 })
 export class KitchenCalculatorPage implements OnInit {
+	private readonly _translate = inject(TranslateService);
+	heightPlaceholder = this._translate.translate('Висота, мм');
+	countPlaceholder = this._translate.translate('К-сть');
+	ovenExamplePlaceholder = this._translate.translate('напр. Духова шафа');
+
 	// Параметри для швидкої генерації списку шаф
 	lengthBase = signal(3.6); // довжина нижніх шаф, м
 	lengthWall = signal(3.0); // довжина верхніх (навісних) шаф, м
@@ -123,30 +127,7 @@ export class KitchenCalculatorPage implements OnInit {
 
 	highlightedId = signal<number | null>(null);
 
-	constructor(
-		private title: Title,
-		private meta: Meta,
-		private seo: SeoService,
-	) {}
-
 	ngOnInit() {
-		this.seo.setPage({
-			title: 'Конструктив кухні - детальний розрахунок деталей | Demchuk Denys',
-			description:
-				'Технічна схема кухні з нумерацією шаф: розміри боковин, дна, полиць, фасадів, шухляд, ніш під техніку та задньої стінки.',
-			path: 'kitchen-calculator',
-		});
-		this.title.setTitle('Конструктив кухні - Demchuk Denys');
-		this.meta.updateTag({
-			name: 'description',
-			content: 'Детальна специфікація деталей кухні по кожній шафі від Demchuk Denys.',
-		});
-		this.meta.updateTag({ property: 'og:title', content: 'Конструктив кухні - Demchuk Denys' });
-		this.meta.updateTag({
-			property: 'og:description',
-			content: 'Технічний розрахунок деталей кухні по кожній шафі, з нішами під техніку.',
-		});
-
 		this.loadKitchenPreset();
 	}
 

@@ -1,8 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { ModelViewerComponent } from '../../components/model-viewer/model-viewer.component';
-import { SeoService } from '../../seo.service';
 
 type Model3d = {
 	title: string;
@@ -14,7 +13,7 @@ type Model3d = {
 
 @Component({
 	selector: 'app-models-3d-page',
-	imports: [RouterLink, ModelViewerComponent],
+	imports: [RouterLink, ModelViewerComponent, TranslateDirective],
 	templateUrl: './models-3d.component.html',
 	styles: [],
 })
@@ -31,30 +30,7 @@ export class Models3dPage implements OnInit {
 
 	activeModel = signal<Model3d | null>(null);
 
-	constructor(
-		private title: Title,
-		private meta: Meta,
-		private seo: SeoService,
-	) {}
-
 	ngOnInit() {
-		this.seo.setPage({
-			title: '3D-моделі меблів | Demchuk Denys',
-			description:
-				'Перегляньте 3D-моделі кухонь та меблів на замовлення від Demchuk Denys. Обертайте модель, наближайте та розглядайте деталі з усіх боків.',
-			path: '3d-models',
-		});
-		this.title.setTitle('3D-моделі - Demchuk Denys');
-		this.meta.updateTag({
-			name: 'description',
-			content: 'Інтерактивні 3D-моделі кухонь та меблів на замовлення від Demchuk Denys.',
-		});
-		this.meta.updateTag({ property: 'og:title', content: '3D-моделі - Demchuk Denys' });
-		this.meta.updateTag({
-			property: 'og:description',
-			content: 'Інтерактивні 3D-моделі кухонь та меблів на замовлення від Demchuk Denys.',
-		});
-
 		this.activeModel.set(this.models[0] ?? null);
 	}
 

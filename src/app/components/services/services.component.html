@@ -3,14 +3,16 @@
 		<div class="text-center mb-16">
 			<span
 				class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block"
-				>Що ми робимо</span
-			>
-			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white mb-4">
-				Наші послуги
-			</h2>
-			<p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-				Повний цикл створення меблів - від першої консультації до встановлення у вашому домі
-			</p>
+				translate="Що ми робимо"
+			></span>
+			<h2
+				class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white mb-4"
+				translate="Наші послуги"
+			></h2>
+			<p
+				class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto"
+				translate="Повний цикл створення меблів - від першої консультації до встановлення у вашому домі"
+			></p>
 		</div>
 
 		<div
@@ -55,12 +57,14 @@
 								/>
 							</svg>
 						</div>
-						<h3 class="text-xl font-bold text-dark dark:text-white mb-3">
-							{{ service.title }}
-						</h3>
-						<p class="text-gray-500 dark:text-gray-400 leading-relaxed text-sm">
-							{{ service.description }}
-						</p>
+						<h3
+							class="text-xl font-bold text-dark dark:text-white mb-3"
+							[translate]="service.title"
+						></h3>
+						<p
+							class="text-gray-500 dark:text-gray-400 leading-relaxed text-sm"
+							[translate]="service.description"
+						></p>
 					</div>
 				</a>
 			}
@@ -71,7 +75,7 @@
 				routerLink="/services"
 				class="inline-flex items-center justify-center px-8 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
 			>
-				Детальніше про послуги
+				<span translate="Детальніше про послуги"></span>
 				<svg
 					class="w-4 h-4 ml-2"
 					fill="none"

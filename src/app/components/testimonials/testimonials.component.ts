@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-children.directive';
 
 @Component({
 	selector: 'app-testimonials',
-	imports: [ScrollAnimateDirective, ScrollAnimateChildrenDirective],
+	imports: [ScrollAnimateDirective, ScrollAnimateChildrenDirective, TranslateDirective],
 	template: `
 		<section class="py-20 lg:py-28 bg-white dark:bg-dark-light" appScrollAnimate>
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center mb-16">
 					<span
 						class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block"
-						>Відгуки</span
-					>
+						translate="Відгуки"
+					></span>
 					<h2
 						class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white mb-4"
-					>
-						Що кажуть клієнти
-					</h2>
-					<p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-						Нам довіряють сотні задоволених клієнтів по всій Україні
-					</p>
+						translate="Що кажуть клієнти"
+					></h2>
+					<p
+						class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto"
+						translate="Нам довіряють сотні задоволених клієнтів по всій Україні"
+					></p>
 				</div>
 
 				<div
@@ -41,9 +42,10 @@ import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-
 								/>
 							</svg>
 
-							<p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-								{{ testimonial.text }}
-							</p>
+							<p
+								class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6"
+								[translate]="testimonial.text"
+							></p>
 
 							<!-- Stars -->
 							<div class="flex gap-1 mb-4">
@@ -75,7 +77,7 @@ import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-
 									<p class="font-semibold text-dark dark:text-white text-sm">
 										{{ testimonial.name }}
 									</p>
-									<p class="text-gray-400 text-xs">{{ testimonial.project }}</p>
+									<p class="text-gray-400 text-xs" [translate]="testimonial.project"></p>
 								</div>
 							</div>
 						</div>

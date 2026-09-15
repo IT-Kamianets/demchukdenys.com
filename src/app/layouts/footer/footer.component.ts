@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-footer',
-	imports: [RouterLink],
+	imports: [RouterLink, TranslateDirective],
 	templateUrl: './footer.component.html',
 	styles: [],
 })

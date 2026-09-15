@@ -1,43 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SeoService } from '../../seo.service';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 
 @Component({
 	selector: 'app-portfolios',
-	imports: [RouterLink],
+	imports: [RouterLink, TranslateDirective],
 	templateUrl: './portfolios.component.html',
 	styles: [],
 })
-export class PortfoliosPage implements OnInit {
-	constructor(
-		private title: Title,
-		private meta: Meta,
-		private seo: SeoService,
-	) {}
-
-	ngOnInit() {
-		this.seo.setPage({
-			title: 'Портфоліо меблів на замовлення | Demchuk Denys',
-			description:
-				'Портфоліо кухонь, спалень, корпусних меблів і гардеробних систем, виготовлених Demchuk Denys у Камʼянці-Подільському.',
-			path: 'portfolios',
-			image: '/img/slider/k1.webp',
-		});
-		this.title.setTitle('Портфоліо - Demchuk Denys');
-		this.meta.updateTag({
-			name: 'description',
-			content:
-				'Наші кращі роботи: кухні, спальні, вітальні та гардеробні кімнати преміум-класу.',
-		});
-		this.meta.updateTag({ property: 'og:title', content: 'Портфоліо - Demchuk Denys' });
-		this.meta.updateTag({
-			property: 'og:description',
-			content:
-				'Наші кращі роботи: кухні, спальні, вітальні та гардеробні кімнати преміум-класу.',
-		});
-	}
-
+export class PortfoliosPage {
 	portfolioItems = [
 		{
 			id: 1,

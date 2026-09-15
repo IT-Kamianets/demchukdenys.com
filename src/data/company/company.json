@@ -1,0 +1,93 @@
+{
+	"_id": "",
+	"name": "Demchuk Denys",
+	"title": "Demchuk Denys - Кухні та меблі люкс якості",
+	"description": "Кухні, корпусні меблі та гардеробні системи на замовлення в Камʼянці-Подільському. Індивідуальний дизайн, замір і монтаж.",
+	"image": "/og-preview.png",
+	"siteUrl": "https://demchukdenys.com",
+	"lang": "uk",
+	"locale": "uk_UA",
+	"logo": "/logo.png",
+	"phone": "+380680278101",
+	"email": "",
+	"address": "вул. Івана Мазепи, 51, Камʼянець-Подільський, Хмельницька область, 32306",
+	"currency": {
+		"code": "UAH",
+		"icon": "₴"
+	},
+	"defaultSeo": {
+		"title": "Меблі на замовлення в Камʼянці-Подільському | Demchuk Denys",
+		"description": "Кухні, корпусні меблі та гардеробні системи на замовлення в Камʼянці-Подільському. Індивідуальний дизайн, замір і монтаж.",
+		"keywords": ["меблі на замовлення", "кухні на замовлення", "гардеробні системи", "Камʼянець-Подільський"],
+		"author": "Demchuk Denys",
+		"robots": "index, follow",
+		"image": "/og-preview.png",
+		"type": "website",
+		"twitterCard": "summary_large_image"
+	},
+	"pageSeo": {
+		"/": {
+			"titleSuffix": ""
+		},
+		"/services": {
+			"title": "Послуги з виготовлення меблів на замовлення | Demchuk Denys",
+			"description": "Проєктуємо та виготовляємо кухні, корпусні меблі й гардеробні системи. Замір, дизайн, доставка та монтаж у Камʼянці-Подільському.",
+			"image": "/img/services/k4.webp"
+		},
+		"/portfolios": {
+			"title": "Портфоліо меблів на замовлення | Demchuk Denys",
+			"description": "Портфоліо кухонь, спалень, корпусних меблів і гардеробних систем, виготовлених Demchuk Denys у Камʼянці-Подільському.",
+			"image": "/img/slider/k1.webp"
+		},
+		"/articles": {
+			"title": "Статті про меблі та дизайн інтерʼєру | Demchuk Denys",
+			"description": "Корисні статті про планування кухні, меблі на замовлення, організацію простору та дизайн інтерʼєру.",
+			"image": "/img/article/k.webp"
+		},
+		"/3d-models": {
+			"title": "3D-моделі меблів | Demchuk Denys",
+			"description": "Перегляньте 3D-моделі кухонь та меблів на замовлення від Demchuk Denys. Обертайте модель, наближайте та розглядайте деталі з усіх боків."
+		},
+		"/kitchen-calculator": {
+			"title": "Конструктив кухні - детальний розрахунок деталей | Demchuk Denys",
+			"description": "Технічна схема кухні з нумерацією шаф: розміри боковин, дна, полиць, фасадів, шухляд, ніш під техніку та задньої стінки."
+		},
+		"/catalog": {
+			"title": "Каталог товарів | Demchuk Denys",
+			"description": "Техніка та сантехніка для кухні й інтер'єру.",
+			"robots": "noindex, nofollow"
+		},
+		"/cart": {
+			"title": "Кошик | Demchuk Denys",
+			"description": "Ваше замовлення.",
+			"robots": "noindex, nofollow"
+		},
+		"/checkout": {
+			"title": "Оформлення замовлення | Demchuk Denys",
+			"description": "Оформлення замовлення.",
+			"robots": "noindex, nofollow"
+		},
+		"/account": {
+			"title": "Особистий кабінет | Demchuk Denys",
+			"description": "Історія замовлень.",
+			"robots": "noindex, nofollow"
+		},
+		"/admin": {
+			"title": "Панель керування | Demchuk Denys",
+			"description": "Адміністрування каталогу.",
+			"robots": "noindex, nofollow"
+		}
+	},
+	"structuredData": {
+		"type": "FurnitureStore",
+		"priceRange": "$$",
+		"servesCuisine": "",
+		"addressLocality": "Камʼянець-Подільський",
+		"addressCountry": "UA",
+		"sameAs": [
+			"https://www.facebook.com/denys.demchuk.2025",
+			"https://instagram.com/demchuk_denys",
+			"https://t.me/Demchukdv"
+		]
+	}
+}

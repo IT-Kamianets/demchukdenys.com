@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
+import { TranslateService } from '@wawjs/ngx-translate';
 
 @Component({
 	selector: 'app-back-to-top',
@@ -8,7 +9,7 @@ import { Component, HostListener } from '@angular/core';
 			<button
 				(click)="scrollToTop()"
 				class="fixed bottom-6 left-6 z-40 w-12 h-12 bg-beige text-dark rounded-full shadow-lg flex items-center justify-center hover:bg-beige-light transition-all duration-300 animate-[fadeIn_0.3s_ease-out]"
-				aria-label="Прокрутити вгору"
+				[attr.aria-label]="scrollUpLabel()"
 			>
 				<svg
 					class="w-5 h-5"
@@ -29,6 +30,9 @@ import { Component, HostListener } from '@angular/core';
 	styles: [],
 })
 export class BackToTopComponent {
+	private readonly _translate = inject(TranslateService);
+	scrollUpLabel = this._translate.translate('Прокрутити вгору');
+
 	visible = false;
 
 	@HostListener('window:scroll')

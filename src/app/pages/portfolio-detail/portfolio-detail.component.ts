@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { LightboxComponent } from '../../components/lightbox/lightbox.component';
 import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-portfolio-detail',
-	imports: [RouterLink, LightboxComponent],
+	imports: [RouterLink, LightboxComponent, TranslateDirective],
 	templateUrl: './portfolio-detail.component.html',
 	styles: [],
 })
@@ -73,34 +73,21 @@ export class PortfolioDetailPage implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		private title: Title,
-		private meta: Meta,
 		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
 		const id = Number(this.route.snapshot.paramMap.get('id'));
 		this.item = this.portfolioItems.find((p) => p.id === id) || this.portfolioItems[0];
-		this.title.setTitle(`${this.item.title} - Demchuk Denys`);
-		this.meta.updateTag({
-			name: 'description',
-			content: this.item.fullDescription.substring(0, 160),
-		});
-		this.meta.updateTag({ property: 'og:title', content: this.item.title });
-		this.meta.updateTag({
-			property: 'og:description',
-			content: this.item.fullDescription.substring(0, 160),
-		});
 		this.seo.setPage({
-			title: `${this.item.title} | Demchuk Denys`,
+			title: this.item.title,
 			description: this.item.fullDescription.substring(0, 160),
-			path: `portfolio/${this.item.id}`,
 			image: `/${this.item.image}`,
 		});
 		this.seo.setBreadcrumbs([
-			{ name: 'Головна', path: '' },
-			{ name: 'Портфоліо', path: 'portfolios' },
-			{ name: this.item.title, path: `portfolio/${this.item.id}` },
+			{ name: 'Головна', path: '/' },
+			{ name: 'Портфоліо', path: '/portfolios' },
+			{ name: this.item.title, path: `/portfolio/${this.item.id}` },
 		]);
 	}
 }

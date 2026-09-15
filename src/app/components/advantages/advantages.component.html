@@ -13,13 +13,15 @@
 
 	<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="text-center mb-10 sm:mb-16">
-			<span class="text-xs uppercase tracking-widest text-beige font-semibold mb-3 block"
-				>Переваги</span
-			>
-			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Чому обирають нас</h2>
-			<p class="text-gray-400 max-w-xl mx-auto">
-				Ми поєднуємо традиції майстерності з сучасними технологіями
-			</p>
+			<span
+				class="text-xs uppercase tracking-widest text-beige font-semibold mb-3 block"
+				translate="Переваги"
+			></span>
+			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4" translate="Чому обирають нас"></h2>
+			<p
+				class="text-gray-400 max-w-xl mx-auto"
+				translate="Ми поєднуємо традиції майстерності з сучасними технологіями"
+			></p>
 		</div>
 
 		<div
@@ -39,8 +41,11 @@
 							class="w-10 h-10"
 						/>
 					</div>
-					<h3 class="text-lg font-bold mb-3 text-white">{{ advantage.title }}</h3>
-					<p class="text-gray-400 text-sm leading-relaxed">{{ advantage.description }}</p>
+					<h3 class="text-lg font-bold mb-3 text-white" [translate]="advantage.title"></h3>
+					<p
+						class="text-gray-400 text-sm leading-relaxed"
+						[translate]="advantage.description"
+					></p>
 				</div>
 			}
 		</div>
@@ -51,19 +56,19 @@
 		>
 			<div class="text-center">
 				<p class="text-3xl md:text-4xl font-bold text-beige">14+</p>
-				<p class="text-gray-400 text-sm mt-1">Років досвіду</p>
+				<p class="text-gray-400 text-sm mt-1" translate="Років досвіду"></p>
 			</div>
 			<div class="text-center">
 				<p class="text-3xl md:text-4xl font-bold text-beige">500+</p>
-				<p class="text-gray-400 text-sm mt-1">Реалізованих проєктів</p>
+				<p class="text-gray-400 text-sm mt-1" translate="Реалізованих проєктів"></p>
 			</div>
 			<div class="text-center">
 				<p class="text-3xl md:text-4xl font-bold text-beige">98%</p>
-				<p class="text-gray-400 text-sm mt-1">Задоволених клієнтів</p>
+				<p class="text-gray-400 text-sm mt-1" translate="Задоволених клієнтів"></p>
 			</div>
 			<div class="text-center">
-				<p class="text-3xl md:text-4xl font-bold text-beige">5 років</p>
-				<p class="text-gray-400 text-sm mt-1">Гарантія на роботи</p>
+				<p class="text-3xl md:text-4xl font-bold text-beige" translate="5 років"></p>
+				<p class="text-gray-400 text-sm mt-1" translate="Гарантія на роботи"></p>
 			</div>
 		</div>
 	</div>

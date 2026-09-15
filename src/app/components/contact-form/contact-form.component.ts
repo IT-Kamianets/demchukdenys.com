@@ -1,19 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateDirective, TranslateService } from '@wawjs/ngx-translate';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-contact-form',
-	imports: [FormsModule, ScrollAnimateDirective],
+	imports: [FormsModule, ScrollAnimateDirective, TranslateDirective],
 	templateUrl: './contact-form.component.html',
 	styles: [],
 })
 export class ContactFormComponent implements AfterViewInit {
 	private _httpClient = inject(HttpClient);
+	private readonly _translate = inject(TranslateService);
 	contactPhoneHref = environment.phoneHref;
 	contactPhoneDisplay = environment.phoneDisplay;
+
+	namePlaceholder = this._translate.translate("Заповніть ваше ім'я...");
+	phonePlaceholder = this._translate.translate('Заповніть ваш телефон...');
+	addressPlaceholder = this._translate.translate('Заповніть вашу адресу...');
+	messagePlaceholder = this._translate.translate(
+		'Опишіть ваші побажання: тип меблів, розміри, стиль...',
+	);
 
 	@ViewChild('formEl') private _formEl?: ElementRef<HTMLElement>;
 	formMinHeight: number | null = null;

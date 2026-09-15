@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-children.directive';
 
 @Component({
 	selector: 'app-advantages',
-	imports: [ScrollAnimateDirective, ScrollAnimateChildrenDirective],
+	imports: [ScrollAnimateDirective, ScrollAnimateChildrenDirective, TranslateDirective],
 	templateUrl: './advantages.component.html',
 	styles: [],
 })

@@ -1,42 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
-import { SeoService } from '../../seo.service';
+import { Component } from '@angular/core';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 
 @Component({
 	selector: 'app-services-page',
-	imports: [RouterLink],
+	imports: [TranslateDirective],
 	templateUrl: './services.component.html',
 	styles: [],
 })
-export class ServicesPage implements OnInit {
-	constructor(
-		private title: Title,
-		private meta: Meta,
-		private seo: SeoService,
-	) {}
-
-	ngOnInit() {
-		this.seo.setPage({
-			title: 'Послуги з виготовлення меблів на замовлення | Demchuk Denys',
-			description:
-				'Проєктуємо та виготовляємо кухні, корпусні меблі й гардеробні системи. Замір, дизайн, доставка та монтаж у Камʼянці-Подільському.',
-			path: 'services',
-			image: '/img/services/k4.webp',
-		});
-		this.title.setTitle('Послуги - Demchuk Denys');
-		this.meta.updateTag({
-			name: 'description',
-			content:
-				'Кухні на замовлення, корпусні меблі та гардеробні системи від Demchuk Denys. Повний цикл від заміру до монтажу.',
-		});
-		this.meta.updateTag({ property: 'og:title', content: 'Послуги - Demchuk Denys' });
-		this.meta.updateTag({
-			property: 'og:description',
-			content: 'Кухні на замовлення, корпусні меблі та гардеробні системи від Demchuk Denys.',
-		});
-	}
-
+export class ServicesPage {
 	services = [
 		{
 			title: 'Кухні на замовлення',

@@ -15,6 +15,7 @@ import {
 	inject,
 	signal,
 } from '@angular/core';
+import { TranslateService } from '@wawjs/ngx-translate';
 
 export type ModelLabel = {
 	id: number;
@@ -42,6 +43,10 @@ export type ModelLabel = {
 })
 export class ModelViewerComponent implements AfterViewInit, OnChanges, OnDestroy {
 	private readonly platformId = inject(PLATFORM_ID);
+	private readonly _translate = inject(TranslateService);
+	exitFullscreenLabel = this._translate.translate('Вийти з повноекранного режиму');
+	enterFullscreenLabel = this._translate.translate('На весь екран');
+	loadErrorLabel = this._translate.translate('Не вдалося завантажити модель.');
 
 	@Input({ required: true }) src!: string;
 	@Input() labels: ModelLabel[] = [];

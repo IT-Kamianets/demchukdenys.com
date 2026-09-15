@@ -1,11 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 
 @Component({
 	selector: 'app-portfolio',
-	imports: [RouterLink, ScrollAnimateDirective],
+	imports: [RouterLink, ScrollAnimateDirective, TranslateDirective],
 	templateUrl: './portfolio.component.html',
 	styles: [],
 })

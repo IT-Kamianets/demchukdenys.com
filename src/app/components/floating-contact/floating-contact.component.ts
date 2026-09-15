@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { TranslateService } from '@wawjs/ngx-translate';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -54,7 +55,7 @@ import { environment } from '../../../environments/environment';
 						target="_blank"
 						rel="noopener noreferrer"
 						class="w-12 h-12 bg-black text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
-						aria-label="ШІ-консультант ChatGPT"
+						[attr.aria-label]="chatGptLabel()"
 					>
 						<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
 							<path
@@ -65,7 +66,7 @@ import { environment } from '../../../environments/environment';
 					<a
 						[href]="phoneHref"
 						class="w-12 h-12 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
-						aria-label="Зателефонувати"
+						[attr.aria-label]="callLabel()"
 					>
 						<svg
 							class="w-6 h-6"
@@ -89,7 +90,7 @@ import { environment } from '../../../environments/environment';
 				(click)="open = !open"
 				class="w-14 h-14 bg-beige text-dark rounded-full shadow-lg flex items-center justify-center hover:bg-beige-light transition-all duration-300"
 				[class]="open ? 'rotate-45' : ''"
-				aria-label="Зв'язатися з нами"
+				[attr.aria-label]="contactUsLabel()"
 			>
 				@if (!open) {
 					<svg
@@ -125,6 +126,11 @@ import { environment } from '../../../environments/environment';
 	`,
 })
 export class FloatingContactComponent {
+	private readonly _translate = inject(TranslateService);
+	chatGptLabel = this._translate.translate('ШІ-консультант ChatGPT');
+	callLabel = this._translate.translate('Зателефонувати');
+	contactUsLabel = this._translate.translate("Зв'язатися з нами");
+
 	open = false;
 	phoneHref = environment.phoneHref;
 	facebookUrl = environment.facebookUrl;

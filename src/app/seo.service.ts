@@ -1,125 +1,48 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Service } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-
-const SITE_URL = 'https://demchukdenys.com';
-const DEFAULT_IMAGE = '/og-preview.png';
-
-type PageSeo = {
-	title: string;
-	description: string;
-	path?: string;
-	image?: string;
-	type?: 'article' | 'website';
-};
+import { buildAbsoluteUrl } from '@wawjs/ngx-default';
+import { MetaPage, MetaService } from '@wawjs/ngx-core';
+import { companyProfile } from './feature/company/company.data';
 
 @Service()
 export class SeoService {
 	private readonly _document = inject(DOCUMENT);
-	private readonly _meta = inject(Meta);
-	private readonly _title = inject(Title);
+	private readonly _metaService = inject(MetaService);
 
-	setPage(page: PageSeo): void {
-		queueMicrotask(() => this._applyPage(page));
-	}
-
-	setNoIndex(): void {
-		this._meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
-	}
-
-	private _applyPage({
-		title,
-		description,
-		path = '',
-		image = DEFAULT_IMAGE,
-		type = 'website',
-	}: PageSeo): void {
-		const url = new URL(path, `${SITE_URL}/`).href;
-		const imageUrl = new URL(image, `${SITE_URL}/`).href;
-
-		this._title.setTitle(title);
-		this._meta.updateTag({ name: 'description', content: description });
-		this._meta.updateTag({ property: 'og:title', content: title });
-		this._meta.updateTag({ property: 'og:description', content: description });
-		this._meta.updateTag({ property: 'og:url', content: url });
-		this._meta.updateTag({ property: 'og:image', content: imageUrl });
-		this._meta.updateTag({ property: 'og:type', content: type });
-		this._meta.updateTag({ property: 'og:locale', content: 'uk_UA' });
-		this._meta.updateTag({ property: 'og:site_name', content: 'Demchuk Denys' });
-		this._meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-		this._meta.updateTag({ name: 'twitter:title', content: title });
-		this._meta.updateTag({ name: 'twitter:description', content: description });
-		this._meta.updateTag({ name: 'twitter:image', content: imageUrl });
-
-		let canonical = this._document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-
-		if (!canonical) {
-			canonical = this._document.createElement('link');
-			canonical.rel = 'canonical';
-			this._document.head.appendChild(canonical);
-		}
-
-		canonical.href = url;
+	/** Sets meta for dynamic/id pages (portfolio & article detail) whose content isn't known at route-definition time. */
+	setPage(page: MetaPage): void {
+		this._metaService.applyMeta(page);
 	}
 
 	setBusinessSchema(): void {
+		const { structuredData } = companyProfile;
 		const schema = {
 			'@context': 'https://schema.org',
-			'@type': 'FurnitureStore',
-			name: 'Demchuk Denys',
-			url: SITE_URL,
-			image: new URL(DEFAULT_IMAGE, `${SITE_URL}/`).href,
-			telephone: '+380680278101',
+			'@type': structuredData.type,
+			name: companyProfile.name,
+			url: companyProfile.siteUrl,
+			image: buildAbsoluteUrl(companyProfile.siteUrl, companyProfile.image),
+			telephone: companyProfile.phone,
 			address: {
 				'@type': 'PostalAddress',
-				streetAddress: 'вул. Івана Мазепи, 51',
-				addressLocality: 'Камʼянець-Подільський',
-				addressRegion: 'Хмельницька область',
-				postalCode: '32306',
-				addressCountry: 'UA',
+				streetAddress: companyProfile.address,
+				addressLocality: structuredData.addressLocality,
+				addressCountry: structuredData.addressCountry,
 			},
-			geo: {
-				'@type': 'GeoCoordinates',
-				latitude: 48.68475,
-				longitude: 26.5977,
-			},
-			makesOffer: [
-				'Кухні на замовлення',
-				'Корпусні меблі на замовлення',
-				'Гардеробні системи',
-			].map((name) => ({
-				'@type': 'Offer',
-				itemOffered: {
-					'@type': 'Service',
-					name,
-				},
-			})),
-			sameAs: [
-				'https://www.facebook.com/denys.demchuk.2025',
-				'https://instagram.com/demchuk_denys',
-				'https://t.me/Demchukdv',
-			],
-			priceRange: '$$',
+			sameAs: structuredData.sameAs,
+			priceRange: structuredData.priceRange,
 		};
-		let script = this._document.head.querySelector<HTMLScriptElement>('#business-schema');
 
-		if (!script) {
-			script = this._document.createElement('script');
-			script.id = 'business-schema';
-			script.type = 'application/ld+json';
-			this._document.head.appendChild(script);
-		}
-
-		script.textContent = JSON.stringify(schema);
+		this._setJsonLd('business-schema', schema);
 	}
 
 	setWebSiteSchema(): void {
 		this._setJsonLd('website-schema', {
 			'@context': 'https://schema.org',
 			'@type': 'WebSite',
-			name: 'Demchuk Denys',
-			url: SITE_URL,
-			inLanguage: 'uk-UA',
+			name: companyProfile.name,
+			url: companyProfile.siteUrl,
+			inLanguage: companyProfile.locale,
 		});
 	}
 
@@ -141,12 +64,12 @@ export class SeoService {
 			'@type': 'Article',
 			headline: title,
 			description,
-			image: new URL(image, `${SITE_URL}/`).href,
+			image: buildAbsoluteUrl(companyProfile.siteUrl, image),
 			datePublished,
 			dateModified: datePublished,
-			mainEntityOfPage: new URL(path, `${SITE_URL}/`).href,
-			author: { '@type': 'Organization', name: 'Demchuk Denys' },
-			publisher: { '@type': 'Organization', name: 'Demchuk Denys' },
+			mainEntityOfPage: buildAbsoluteUrl(companyProfile.siteUrl, path),
+			author: { '@type': 'Organization', name: companyProfile.name },
+			publisher: { '@type': 'Organization', name: companyProfile.name },
 		});
 	}
 
@@ -158,7 +81,7 @@ export class SeoService {
 				'@type': 'ListItem',
 				position: index + 1,
 				name: item.name,
-				item: new URL(item.path, `${SITE_URL}/`).href,
+				item: buildAbsoluteUrl(companyProfile.siteUrl, item.path),
 			})),
 		});
 	}

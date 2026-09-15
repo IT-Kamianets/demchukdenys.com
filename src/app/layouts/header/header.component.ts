@@ -1,10 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-header',
-	imports: [RouterLink, RouterLinkActive],
+	imports: [RouterLink, RouterLinkActive, TranslateDirective],
 	templateUrl: './header.component.html',
 	styles: [],
 })

@@ -4,17 +4,18 @@
 			<div>
 				<span
 					class="text-xs uppercase tracking-widest text-beige-dark dark:text-beige font-semibold mb-3 block"
-					>Блог</span
-				>
-				<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white">
-					Новини та статті
-				</h2>
+					translate="Блог"
+				></span>
+				<h2
+					class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white"
+					translate="Новини та статті"
+				></h2>
 			</div>
 			<a
 				routerLink="/articles"
 				class="mt-4 md:mt-0 inline-flex items-center text-beige-dark font-semibold hover:text-dark dark:hover:text-beige-light transition-colors"
 			>
-				Всі статті
+				<span translate="Всі статті"></span>
 				<svg
 					class="w-4 h-4 ml-2"
 					fill="none"
@@ -54,20 +55,20 @@
 					<div class="p-6 lg:p-8">
 						<span
 							class="text-xs text-beige-dark dark:text-beige uppercase tracking-wider font-semibold"
-							>{{ article.date }}</span
-						>
+							[translate]="article.date"
+						></span>
 						<h3
 							class="text-lg font-bold text-dark dark:text-white mt-3 mb-3 leading-snug group-hover:text-beige-dark transition-colors"
-						>
-							{{ article.title }}
-						</h3>
-						<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-5">
-							{{ article.excerpt }}
-						</p>
+							[translate]="article.title"
+						></h3>
+						<p
+							class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-5"
+							[translate]="article.excerpt"
+						></p>
 						<span
 							class="text-beige-dark font-semibold text-sm inline-flex items-center group-hover:translate-x-1 transition-transform"
 						>
-							Читати далі
+							<span translate="Читати далі"></span>
 							<svg
 								class="w-4 h-4 ml-1"
 								fill="none"

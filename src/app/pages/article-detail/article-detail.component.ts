@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { SeoService } from '../../seo.service';
 
 @Component({
 	selector: 'app-article-detail',
-	imports: [RouterLink],
+	imports: [RouterLink, TranslateDirective],
 	templateUrl: './article-detail.component.html',
 	styles: [],
 })
@@ -65,30 +65,16 @@ export class ArticleDetailPage implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		private title: Title,
-		private meta: Meta,
 		private seo: SeoService,
 	) {}
 
 	ngOnInit() {
 		const id = Number(this.route.snapshot.paramMap.get('id'));
 		this.article = this.articles.find((a) => a.id === id) || this.articles[0];
-		this.title.setTitle(`${this.article.title} -Demchuk Denys`);
-		this.meta.updateTag({
-			name: 'description',
-			content: this.article.content.substring(0, 160),
-		});
-		this.meta.updateTag({ property: 'og:title', content: this.article.title });
-		this.meta.updateTag({
-			property: 'og:description',
-			content: this.article.content.substring(0, 160),
-		});
 		this.seo.setPage({
-			title: `${this.article.title} | Demchuk Denys`,
+			title: this.article.title,
 			description: this.article.content.substring(0, 160),
-			path: `article/${this.article.id}`,
 			image: `/${this.article.image}`,
-			type: 'article',
 		});
 		const datePublished = ['2026-07-29', '2026-07-18', '2026-07-04', '2026-06-26', '2026-06-14', '2026-06-03'][
 			this.article.id - 1
@@ -96,14 +82,14 @@ export class ArticleDetailPage implements OnInit {
 		this.seo.setArticleSchema({
 			title: this.article.title,
 			description: this.article.content.substring(0, 160),
-			path: `article/${this.article.id}`,
+			path: `/article/${this.article.id}`,
 			image: `/${this.article.image}`,
 			datePublished,
 		});
 		this.seo.setBreadcrumbs([
-			{ name: 'Головна', path: '' },
-			{ name: 'Статті', path: 'articles' },
-			{ name: this.article.title, path: `article/${this.article.id}` },
+			{ name: 'Головна', path: '/' },
+			{ name: 'Статті', path: '/articles' },
+			{ name: this.article.title, path: `/article/${this.article.id}` },
 		]);
 	}
 }

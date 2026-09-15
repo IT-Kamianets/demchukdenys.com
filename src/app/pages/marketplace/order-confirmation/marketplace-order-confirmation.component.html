@@ -1,0 +1,43 @@
+<section class="bg-warm-white dark:bg-dark min-h-screen flex items-center">
+	<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+		<nav class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+			<a routerLink="/" class="hover:text-beige-dark transition-colors">Головна</a>
+			<span class="mx-2">/</span>
+			<a routerLink="/cart" class="hover:text-beige-dark transition-colors">Кошик</a>
+			<span class="mx-2">/</span>
+			<span class="text-dark dark:text-white">Підтвердження</span>
+		</nav>
+		<div class="bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-10 shadow-sm text-center">
+			<div class="w-16 h-16 bg-beige/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+				<svg class="w-8 h-8 text-beige-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+				</svg>
+			</div>
+			<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white mb-2">Дякуємо за замовлення!</h1>
+			<p class="text-gray-500 dark:text-gray-400 mb-1">Номер замовлення</p>
+			<p class="text-xl font-bold text-beige-dark mb-6">{{ orderNumber }}</p>
+			<p class="inline-block text-sm bg-beige/20 text-beige-dark px-4 py-1.5 rounded-full mb-8">{{ status }}</p>
+
+			<div class="text-left divide-y divide-gray-100 dark:divide-gray-800 mb-6">
+				@for (item of items; track item.title) {
+					<div class="flex justify-between py-3 text-sm">
+						<span class="text-dark dark:text-white">{{ item.title }} × {{ item.qty }}</span>
+						<span class="text-gray-500 dark:text-gray-400">{{ item.price * item.qty }} грн</span>
+					</div>
+				}
+			</div>
+
+			<div class="flex justify-between font-bold text-dark dark:text-white mb-8">
+				<span>Разом</span>
+				<span>{{ total }} грн</span>
+			</div>
+
+			<a
+				routerLink="/catalog"
+				class="inline-flex items-center justify-center px-8 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
+			>
+				Повернутись до каталогу
+			</a>
+		</div>
+	</div>
+</section>

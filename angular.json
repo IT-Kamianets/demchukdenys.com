@@ -19,12 +19,21 @@
 					"options": {
 						"browser": "src/main.ts",
 						"server": "src/main.server.ts",
-						"outputMode": "static",
+						"outputMode": "server",
+						"ssr": {
+							"entry": "src/server.ts"
+						},
 						"tsConfig": "tsconfig.app.json",
 						"assets": [
 							{
 								"glob": "**/*",
-								"input": "public"
+								"input": "src/assets",
+								"output": "/"
+							},
+							{
+								"glob": "**/*.json",
+								"input": "src/i18n",
+								"output": "/i18n/"
 							}
 						],
 						"styles": ["src/styles.css"]
@@ -43,7 +52,13 @@
 									"maximumError": "8kB"
 								}
 							],
-							"outputHashing": "all"
+							"outputHashing": "all",
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
+								}
+							]
 						},
 						"development": {
 							"optimization": false,

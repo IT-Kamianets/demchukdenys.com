@@ -1,0 +1,203 @@
+<section class="bg-warm-white dark:bg-dark min-h-screen">
+	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-10 sm:pb-16">
+		<div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+			<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white">Панель керування</h1>
+			<div class="flex items-center gap-3 flex-wrap">
+				@if (tab() === 'products') {
+					<button
+						type="button"
+						(click)="startCreate()"
+						class="px-4 py-2 rounded-full text-sm font-semibold bg-beige text-dark hover:bg-beige-dark transition-colors"
+					>
+						+ Додати товар
+					</button>
+				} @else {
+					<button
+						type="button"
+						(click)="startCreateOrder()"
+						class="px-4 py-2 rounded-full text-sm font-semibold bg-beige text-dark hover:bg-beige-dark transition-colors"
+					>
+						+ Нове замовлення
+					</button>
+				}
+				<button
+					type="button"
+					(click)="tab.set('products')"
+					class="px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+					[class]="tab() === 'products' ? 'bg-dark text-white dark:bg-beige dark:text-dark' : 'bg-white dark:bg-dark-light text-gray-500 dark:text-gray-400'"
+				>
+					Товари
+				</button>
+				<button
+					type="button"
+					(click)="tab.set('orders')"
+					class="px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+					[class]="tab() === 'orders' ? 'bg-dark text-white dark:bg-beige dark:text-dark' : 'bg-white dark:bg-dark-light text-gray-500 dark:text-gray-400'"
+				>
+					Замовлення
+				</button>
+			</div>
+		</div>
+
+		@if (tab() === 'products') {
+			@if (editingId()) {
+				<div class="bg-white dark:bg-dark-light rounded-2xl p-6 shadow-sm mb-6 space-y-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<input
+							type="text"
+							[(ngModel)]="form.title"
+							placeholder="Назва"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+						<input
+							type="text"
+							[(ngModel)]="form.category"
+							placeholder="Категорія"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+						<input
+							type="number"
+							[(ngModel)]="form.price"
+							placeholder="Ціна"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+						<input
+							type="text"
+							[(ngModel)]="form.image"
+							placeholder="Шлях до зображення"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+					</div>
+					<textarea
+						[(ngModel)]="form.description"
+						placeholder="Опис"
+						rows="3"
+						class="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					></textarea>
+					<label class="flex items-center gap-2 text-sm text-dark dark:text-white">
+						<input type="checkbox" [(ngModel)]="form.inStock" class="w-4 h-4 accent-beige" />
+						В наявності
+					</label>
+					<div class="flex gap-3">
+						<button
+							type="button"
+							(click)="save()"
+							class="px-5 py-2 rounded-full bg-dark text-white dark:bg-beige dark:text-dark text-sm font-semibold"
+						>
+							Зберегти
+						</button>
+						<button
+							type="button"
+							(click)="cancelEdit()"
+							class="px-5 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm font-semibold"
+						>
+							Скасувати
+						</button>
+					</div>
+				</div>
+			}
+
+			<div class="bg-white dark:bg-dark-light rounded-2xl shadow-sm divide-y divide-gray-100 dark:divide-gray-800">
+				@for (product of products(); track product.id) {
+					<div class="flex items-center gap-4 p-5">
+						<img [src]="product.image" [alt]="product.title" class="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
+						<div class="flex-1">
+							<p class="text-dark dark:text-white font-semibold">{{ product.title }}</p>
+							<p class="text-gray-500 dark:text-gray-400 text-sm">{{ product.price }} {{ product.currency }} · {{ product.category }}</p>
+						</div>
+						<button
+							type="button"
+							(click)="startEdit(product)"
+							class="text-beige-dark hover:text-dark dark:hover:text-white transition-colors text-sm font-semibold"
+						>
+							Редагувати
+						</button>
+						<button
+							type="button"
+							(click)="remove(product.id)"
+							class="text-gray-400 hover:text-red-400 transition-colors text-sm"
+						>
+							Видалити
+						</button>
+					</div>
+				}
+			</div>
+		} @else {
+			@if (creatingOrder()) {
+				<div class="bg-white dark:bg-dark-light rounded-2xl p-6 shadow-sm mb-6 space-y-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<input
+							type="text"
+							[(ngModel)]="orderForm.id"
+							placeholder="Номер замовлення"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+						<input
+							type="text"
+							[(ngModel)]="orderForm.customerName"
+							placeholder="Ім'я клієнта"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+						<input
+							type="text"
+							[(ngModel)]="orderForm.date"
+							placeholder="Дата (ДД.ММ.РРРР)"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+						<input
+							type="number"
+							[(ngModel)]="orderForm.total"
+							placeholder="Сума, грн"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						/>
+					</div>
+					<select
+						[(ngModel)]="orderForm.status"
+						class="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+					>
+						@for (status of statuses; track status) {
+							<option [value]="status">{{ status }}</option>
+						}
+					</select>
+					<div class="flex gap-3">
+						<button
+							type="button"
+							(click)="saveOrder()"
+							class="px-5 py-2 rounded-full bg-dark text-white dark:bg-beige dark:text-dark text-sm font-semibold"
+						>
+							Зберегти
+						</button>
+						<button
+							type="button"
+							(click)="cancelOrder()"
+							class="px-5 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm font-semibold"
+						>
+							Скасувати
+						</button>
+					</div>
+				</div>
+			}
+
+			<div class="bg-white dark:bg-dark-light rounded-2xl shadow-sm divide-y divide-gray-100 dark:divide-gray-800">
+				@for (order of orders(); track order.id) {
+					<div class="flex flex-wrap items-center justify-between gap-3 p-5">
+						<div>
+							<p class="text-dark dark:text-white font-semibold">{{ order.id }}</p>
+							<p class="text-gray-500 dark:text-gray-400 text-sm">{{ order.customerName }} · {{ order.date }}</p>
+						</div>
+						<select
+							[value]="order.status"
+							(change)="updateOrderStatus(order.id, $event)"
+							class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
+						>
+							@for (status of statuses; track status) {
+								<option [value]="status">{{ status }}</option>
+							}
+						</select>
+						<p class="text-dark dark:text-white font-bold">{{ order.total }} грн</p>
+					</div>
+				}
+			</div>
+		}
+	</div>
+</section>

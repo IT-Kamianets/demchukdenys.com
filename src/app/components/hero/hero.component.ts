@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-hero',
-	imports: [FormsModule],
+	imports: [FormsModule, TranslateDirective],
 	templateUrl: './hero.component.html',
 	styles: [],
 })

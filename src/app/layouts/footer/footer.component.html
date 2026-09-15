@@ -4,10 +4,10 @@
 			<!-- Brand -->
 			<div class="md:col-span-2">
 				<img src="logo.png" alt="Demchuk Denys" class="h-8 mb-5" />
-				<p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
-					Створюємо унікальні меблі преміум-класу з натуральних матеріалів. Повний цикл
-					від ідеї до встановлення у вашому домі.
-				</p>
+				<p
+					class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6"
+					translate="Створюємо унікальні меблі преміум-класу з натуральних матеріалів. Повний цикл від ідеї до встановлення у вашому домі."
+				></p>
 				<div class="flex items-center space-x-3">
 					<a
 						[href]="telegramUrl"
@@ -46,33 +46,35 @@
 
 			<!-- Navigation -->
 			<div>
-				<h4 class="text-xs uppercase tracking-widest text-beige mb-5 font-semibold">
-					Навігація
-				</h4>
+				<h4
+					class="text-xs uppercase tracking-widest text-beige mb-5 font-semibold"
+					translate="Навігація"
+				></h4>
 				<nav class="flex flex-col space-y-3">
 					<a
 						routerLink="/portfolios"
 						class="text-gray-400 hover:text-beige transition-colors text-sm"
-						>Портфоліо</a
-					>
+						translate="Портфоліо"
+					></a>
 					<a
 						routerLink="/services"
 						class="text-gray-400 hover:text-beige transition-colors text-sm"
-						>Послуги</a
-					>
+						translate="Послуги"
+					></a>
 					<a
 						routerLink="/articles"
 						class="text-gray-400 hover:text-beige transition-colors text-sm"
-						>Новини</a
-					>
+						translate="Новини"
+					></a>
 				</nav>
 			</div>
 
 			<!-- Contact -->
 			<div>
-				<h4 class="text-xs uppercase tracking-widest text-beige mb-5 font-semibold">
-					Контакти
-				</h4>
+				<h4
+					class="text-xs uppercase tracking-widest text-beige mb-5 font-semibold"
+					translate="Контакти"
+				></h4>
 				<div class="flex flex-col space-y-3">
 					<a
 						[href]="phoneHref"
@@ -148,7 +150,7 @@
 			class="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
 		>
 			<p class="text-gray-500 text-sm">
-				&copy; {{ currentYear }} Demchuk Denys. Всі права захищено.
+				&copy; {{ currentYear }} Demchuk Denys. <span translate="Всі права захищено."></span>
 			</p>
 
 			<!-- Social links - mobile only -->

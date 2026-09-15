@@ -1,0 +1,159 @@
+<section class="bg-warm-white dark:bg-dark min-h-screen">
+	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6">
+		<nav class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+			<a routerLink="/" class="hover:text-beige-dark transition-colors">Головна</a>
+			<span class="mx-2">/</span>
+			<a routerLink="/cart" class="hover:text-beige-dark transition-colors">Кошик</a>
+			<span class="mx-2">/</span>
+			<span class="text-dark dark:text-white">Оформлення</span>
+		</nav>
+		<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white">Оформлення замовлення</h1>
+	</div>
+
+	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+		<div class="lg:col-span-2 bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+			<h2 class="text-lg font-bold text-dark dark:text-white mb-2">Дані для доставки</h2>
+
+			<div>
+				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
+					>Ім'я та прізвище</label
+				>
+				<input
+					type="text"
+					[(ngModel)]="name"
+					name="name"
+					required
+					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige"
+				/>
+			</div>
+
+			<div>
+				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
+					>Телефон</label
+				>
+				<input
+					type="tel"
+					[(ngModel)]="phone"
+					name="phone"
+					required
+					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige"
+				/>
+			</div>
+
+			<div>
+				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
+					>Місто</label
+				>
+				<input
+					type="text"
+					[(ngModel)]="city"
+					name="city"
+					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige"
+				/>
+			</div>
+
+			<div>
+				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
+					>Адреса доставки</label
+				>
+				<textarea
+					[(ngModel)]="address"
+					name="address"
+					rows="2"
+					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige resize-none"
+				></textarea>
+			</div>
+
+			<div>
+				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
+					>Коментар до замовлення (необов'язково)</label
+				>
+				<textarea
+					[(ngModel)]="comment"
+					name="comment"
+					rows="3"
+					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige resize-none"
+				></textarea>
+			</div>
+
+			<div>
+				<span class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
+					>Спосіб оплати</span
+				>
+				<div class="space-y-3">
+					<label
+						class="flex items-start gap-3 rounded-xl border p-4 cursor-pointer transition-colors"
+						[class]="
+							paymentMethod === 'cash'
+								? 'border-dark dark:border-beige bg-warm-white dark:bg-dark'
+								: 'border-gray-200 dark:border-gray-700'
+						"
+					>
+						<input type="radio" name="paymentMethod" value="cash" [(ngModel)]="paymentMethod" class="mt-1 accent-beige" />
+						<span>
+							<span class="block font-semibold text-dark dark:text-white">Готівкою при отриманні</span>
+							<span class="block text-sm text-gray-500 dark:text-gray-400">Кур'єру або при самовивозі</span>
+						</span>
+					</label>
+					<label
+						class="flex items-start gap-3 rounded-xl border p-4 cursor-pointer transition-colors"
+						[class]="
+							paymentMethod === 'transfer'
+								? 'border-dark dark:border-beige bg-warm-white dark:bg-dark'
+								: 'border-gray-200 dark:border-gray-700'
+						"
+					>
+						<input type="radio" name="paymentMethod" value="transfer" [(ngModel)]="paymentMethod" class="mt-1 accent-beige" />
+						<span>
+							<span class="block font-semibold text-dark dark:text-white">Переказ на картку</span>
+							<span class="block text-sm text-gray-500 dark:text-gray-400">Реквізити надішлемо після підтвердження замовлення</span>
+						</span>
+					</label>
+					<label class="flex items-start gap-3 rounded-xl border border-gray-200 dark:border-gray-700 p-4 opacity-50 cursor-not-allowed">
+						<input type="radio" name="paymentMethod" value="card" disabled class="mt-1 accent-beige" />
+						<span>
+							<span class="block font-semibold text-dark dark:text-white">Оплата карткою онлайн</span>
+							<span class="block text-sm text-gray-500 dark:text-gray-400">Незабаром</span>
+						</span>
+					</label>
+				</div>
+			</div>
+
+			<div class="rounded-xl bg-warm-white dark:bg-dark p-4 text-sm text-gray-500 dark:text-gray-400 space-y-2">
+				<p>
+					Онлайн-оформлення замовлень поки недоступне. Після заповнення форми ми зв'яжемось з вами за
+					вказаним номером телефону, щоб підтвердити замовлення та спосіб оплати.
+				</p>
+				<p>
+					Оформити замовлення просто зараз можна за телефоном
+					<a [href]="phoneHref" class="text-beige-dark font-semibold hover:underline">{{ phoneDisplay }}</a
+					>.
+				</p>
+			</div>
+		</div>
+
+		<aside class="bg-white dark:bg-dark-light rounded-2xl p-6 shadow-sm lg:sticky lg:top-24">
+			<h2 class="text-lg font-bold text-dark dark:text-white mb-4">Ваше замовлення</h2>
+			<div class="space-y-2 mb-4">
+				@for (item of items; track item.title) {
+					<div class="flex justify-between text-sm">
+						<span class="text-dark dark:text-white">{{ item.title }} × {{ item.qty }}</span>
+						<span class="text-gray-500 dark:text-gray-400 whitespace-nowrap ml-3">{{ item.price * item.qty }} грн</span>
+					</div>
+				}
+			</div>
+			<div class="flex justify-between items-center border-t border-gray-100 dark:border-gray-800 pt-4 mb-6">
+				<span class="text-gray-500 dark:text-gray-400">Разом</span>
+				<span class="text-2xl font-bold text-dark dark:text-white">{{ total }} грн</span>
+			</div>
+			<button
+				type="button"
+				(click)="onSubmit()"
+				[disabled]="!name.trim() || !phone.trim()"
+				class="w-full px-6 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+			>
+				Надіслати заявку
+			</button>
+		</aside>
+	</div>
+</section>

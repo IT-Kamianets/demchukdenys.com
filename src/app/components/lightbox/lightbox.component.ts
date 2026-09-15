@@ -1,4 +1,5 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, Input, Output } from '@angular/core';
+import { TranslateService } from '@wawjs/ngx-translate';
 
 @Component({
 	selector: 'app-lightbox',
@@ -11,7 +12,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 			<!-- Close button -->
 			<button
 				class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
-				aria-label="Закрити"
+				[attr.aria-label]="closeLabel()"
 				(click)="close.emit()"
 			>
 				<svg
@@ -29,7 +30,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 			@if (images.length > 1) {
 				<button
 					class="absolute left-4 z-10 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-colors"
-					aria-label="Попереднє фото"
+					[attr.aria-label]="prevLabel()"
 					(click)="prev($event)"
 				>
 					<svg
@@ -49,7 +50,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 
 				<button
 					class="absolute right-4 z-10 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white transition-colors"
-					aria-label="Наступне фото"
+					[attr.aria-label]="nextLabel()"
 					(click)="next($event)"
 				>
 					<svg
@@ -79,6 +80,11 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 	`,
 })
 export class LightboxComponent {
+	private readonly _translate = inject(TranslateService);
+	closeLabel = this._translate.translate('Закрити');
+	prevLabel = this._translate.translate('Попереднє фото');
+	nextLabel = this._translate.translate('Наступне фото');
+
 	@Input() images: string[] = [];
 	@Input() currentIndex = 0;
 	@Output() close = new EventEmitter<void>();

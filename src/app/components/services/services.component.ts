@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslateDirective } from '@wawjs/ngx-translate';
 import { ScrollAnimateDirective } from '../../directives/scroll-animate.directive';
 import { ScrollAnimateChildrenDirective } from '../../directives/scroll-animate-children.directive';
 
 @Component({
 	selector: 'app-services',
-	imports: [RouterLink, ScrollAnimateDirective, ScrollAnimateChildrenDirective],
+	imports: [RouterLink, ScrollAnimateDirective, ScrollAnimateChildrenDirective, TranslateDirective],
 	templateUrl: './services.component.html',
 	styles: [],
 })

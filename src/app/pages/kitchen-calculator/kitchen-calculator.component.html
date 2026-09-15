@@ -8,27 +8,29 @@
 			"
 		></div>
 		<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-			<span class="text-xs uppercase tracking-widest text-beige font-semibold mb-3 block"
-				>Технічний розрахунок</span
-			>
-			<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Конструктив</h1>
-			<p class="text-gray-400 max-w-2xl mx-auto">
-				Розбивка кухні по кожній шафі: боковини, дно, полиці, фасади та задня стінка на основі
-				3D-моделі.
-			</p>
+			<span
+				class="text-xs uppercase tracking-widest text-beige font-semibold mb-3 block"
+				translate="Технічний розрахунок"
+			></span>
+			<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4" translate="Конструктив"></h1>
+			<p
+				class="text-gray-400 max-w-2xl mx-auto"
+				translate="Розбивка кухні по кожній шафі: боковини, дно, полиці, фасади та задня стінка на основі 3D-моделі."
+			></p>
 		</div>
 	</div>
 
 	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 		<!-- Generation panel -->
 		<div class="bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-8 shadow-sm">
-			<h2 class="text-lg font-bold text-dark dark:text-white mb-6">Швидка генерація шаф</h2>
+			<h2 class="text-lg font-bold text-dark dark:text-white mb-6" translate="Швидка генерація шаф"></h2>
 
 			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Довж. нижніх, м</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Довж. нижніх, м"
+					></span>
 					<input
 						type="number"
 						step="0.1"
@@ -39,9 +41,10 @@
 					/>
 				</label>
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Довж. верхніх, м</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Довж. верхніх, м"
+					></span>
 					<input
 						type="number"
 						step="0.1"
@@ -52,9 +55,10 @@
 					/>
 				</label>
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Вис. нижніх, мм</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Вис. нижніх, мм"
+					></span>
 					<input
 						type="number"
 						step="10"
@@ -65,9 +69,10 @@
 					/>
 				</label>
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Вис. верхніх, мм</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Вис. верхніх, мм"
+					></span>
 					<input
 						type="number"
 						step="10"
@@ -78,9 +83,10 @@
 					/>
 				</label>
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Глиб. нижніх, мм</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Глиб. нижніх, мм"
+					></span>
 					<input
 						type="number"
 						step="10"
@@ -91,9 +97,10 @@
 					/>
 				</label>
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Глиб. верхніх, мм</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Глиб. верхніх, мм"
+					></span>
 					<input
 						type="number"
 						step="10"
@@ -107,9 +114,10 @@
 
 			<div class="flex flex-wrap items-end gap-4 mt-4">
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Ширина модуля, мм</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Ширина модуля, мм"
+					></span>
 					<input
 						type="number"
 						step="50"
@@ -120,9 +128,10 @@
 					/>
 				</label>
 				<label class="block">
-					<span class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
-						>Товщина ЛДСП, мм</span
-					>
+					<span
+						class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+						translate="Товщина ЛДСП, мм"
+					></span>
 					<input
 						type="number"
 						step="1"
@@ -136,37 +145,29 @@
 					type="button"
 					(click)="generateCabinets()"
 					class="px-5 py-2.5 rounded-full bg-beige text-dark text-sm font-semibold hover:bg-beige-dark transition-colors"
-				>
-					Згенерувати рівні модулі
-				</button>
+				translate="Згенерувати рівні модулі"
+			></button>
 				<button
 					type="button"
 					(click)="loadKitchenPreset()"
 					class="px-5 py-2.5 rounded-full bg-dark text-white text-sm font-semibold hover:bg-dark/80 transition-colors"
-				>
-					Завантажити приклад цієї кухні
-				</button>
+					translate="Завантажити приклад цієї кухні"
+				></button>
 			</div>
-			<p class="text-gray-500 dark:text-gray-400 text-xs mt-3">
-				"Приклад цієї кухні" — набір шаф, наближений до
-				3D-моделі: з нішами
-				під духову шафу, варильну поверхню, мікрохвильову піч і витяжку, шухлядами та кутовими
-				відкритими полицями. Обидві кнопки замінюють поточний список — після цього кожну шафу можна
-				відредагувати окремо.
-			</p>
+			<p
+				class="text-gray-500 dark:text-gray-400 text-xs mt-3"
+				translate='"Приклад цієї кухні" — набір шаф, наближений до 3D-моделі: з нішами під духову шафу, варильну поверхню, мікрохвильову піч і витяжку, шухлядами та кутовими відкритими полицями. Обидві кнопки замінюють поточний список — після цього кожну шафу можна відредагувати окремо.'
+			></p>
 		</div>
 
 		<!-- Schematic elevation -->
 		@if (schema().items.length) {
 			<div class="bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-8 shadow-sm mt-6">
-				<h2 class="text-lg font-bold text-dark dark:text-white mb-1">Схема (фасадна розгортка)</h2>
-				<p class="text-gray-500 dark:text-gray-400 text-xs mb-4">
-					Технічне креслення на основі введених розмірів (не фотографічна копія — 3D-модель не
-					містить розбивки на окремі шафи). Верхній ряд — навісні шафи, нижній — підлогові,
-					висока колона — пенал з технікою. Пунктир — відкриті секції та ніші під техніку (з
-					іконкою духовки/НВЧ/витяжки). Кружечки над стільницею — конфорки. Клік по шафі
-					перемикає на її картку в списку деталізації нижче.
-				</p>
+				<h2 class="text-lg font-bold text-dark dark:text-white mb-1" translate="Схема (фасадна розгортка)"></h2>
+				<p
+					class="text-gray-500 dark:text-gray-400 text-xs mb-4"
+					translate="Технічне креслення на основі введених розмірів (не фотографічна копія — 3D-модель не містить розбивки на окремі шафи). Верхній ряд — навісні шафи, нижній — підлогові, висока колона — пенал з технікою. Пунктир — відкриті секції та ніші під техніку (з іконкою духовки/НВЧ/витяжки). Кружечки над стільницею — конфорки. Клік по шафі перемикає на її картку в списку деталізації нижче."
+				></p>
 				<div class="overflow-x-auto pb-2">
 					<svg
 						[attr.viewBox]="'0 0 ' + schema().width + ' ' + schema().height"
@@ -325,9 +326,8 @@
 										text-anchor="middle"
 										class="fill-beige-dark"
 										font-size="8"
-									>
-										сифон
-									</text>
+										translate="сифон"
+									></text>
 								}
 								<!-- Конфорки варильної поверхні (на стільниці, над шафою) -->
 								@for (dot of item.cooktopDots; track $index) {
@@ -418,19 +418,17 @@
 										class="fill-red-400"
 										font-size="9"
 										font-weight="700"
-									>
-										КУТ
-									</text>
+										translate="КУТ"
+									></text>
 								}
 							</g>
 						}
 					</svg>
 				</div>
-				<p class="text-gray-500 dark:text-gray-400 text-xs mt-3">
-					Пунктирна червона лінія "КУТ" — місце повороту кухні на 90°. Заштрихований прямокутник
-					над навісними шафами — декоративний карниз. Пунктирний контур — виріз під мийку,
-					пунктирна лінія знизу — простір без дна під сифон.
-				</p>
+				<p
+					class="text-gray-500 dark:text-gray-400 text-xs mt-3"
+					translate='Пунктирна червона лінія "КУТ" — місце повороту кухні на 90°. Заштрихований прямокутник над навісними шафами — декоративний карниз. Пунктирний контур — виріз під мийку, пунктирна лінія знизу — простір без дна під сифон.'
+				></p>
 			</div>
 		}
 
@@ -438,27 +436,27 @@
 		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6">
 			<div class="bg-dark rounded-xl p-4 text-center">
 				<div class="text-white font-bold text-lg">{{ totalLength() | number: '1.1-1' }}</div>
-				<div class="text-gray-400 text-xs mt-1">довжина, м</div>
+				<div class="text-gray-400 text-xs mt-1" translate="довжина, м"></div>
 			</div>
 			<div class="bg-dark rounded-xl p-4 text-center">
 				<div class="text-white font-bold text-lg">{{ cabinetsCount() }}</div>
-				<div class="text-gray-400 text-xs mt-1">шаф</div>
+				<div class="text-gray-400 text-xs mt-1" translate="шаф"></div>
 			</div>
 			<div class="bg-dark rounded-xl p-4 text-center">
 				<div class="text-white font-bold text-lg">{{ totalFacadeArea() | number: '1.2-2' }}</div>
-				<div class="text-gray-400 text-xs mt-1">фасади, м²</div>
+				<div class="text-gray-400 text-xs mt-1" translate="фасади, м²"></div>
 			</div>
 			<div class="bg-dark rounded-xl p-4 text-center">
 				<div class="text-white font-bold text-lg">{{ totalLdspArea() | number: '1.2-2' }}</div>
-				<div class="text-gray-400 text-xs mt-1">ЛДСП корпус, м²</div>
+				<div class="text-gray-400 text-xs mt-1" translate="ЛДСП корпус, м²"></div>
 			</div>
 			<div class="bg-dark rounded-xl p-4 text-center">
 				<div class="text-white font-bold text-lg">{{ totalHdfArea() | number: '1.2-2' }}</div>
-				<div class="text-gray-400 text-xs mt-1">ХДФ (задня ст.), м²</div>
+				<div class="text-gray-400 text-xs mt-1" translate="ХДФ (задня ст.), м²"></div>
 			</div>
 			<div class="bg-dark rounded-xl p-4 text-center">
 				<div class="text-white font-bold text-lg">{{ totalEdgeLength() | number: '1.1-1' }}</div>
-				<div class="text-gray-400 text-xs mt-1">крайка, пог. м</div>
+				<div class="text-gray-400 text-xs mt-1" translate="крайка, пог. м"></div>
 			</div>
 		</div>
 
@@ -474,14 +472,15 @@
 					<div class="flex items-center justify-between mb-4">
 						<h3 class="font-bold text-dark dark:text-white">
 							@if (item.cabinet.type === 'tall') {
-								Шафа №{{ i + 1 }} — пенал ({{ item.cabinet.segments.length }} сегм.)
+								<span translate="Шафа"></span> №{{ i + 1 }} — <span translate="пенал"></span> ({{ item.cabinet.segments.length }} <span translate="сегм."></span>)
 							} @else {
-								Шафа №{{ i + 1 }} — {{ item.cabinet.type === 'base' ? 'нижня' : 'верхня' }}
+								<span translate="Шафа"></span> №{{ i + 1 }} —
+								<span [translate]="item.cabinet.type === 'base' ? 'нижня' : 'верхня'"></span>
 								@switch (item.cabinet.facadeType) {
-									@case ('doors') {, двері}
-									@case ('drawers') {, шухляди}
-									@case ('niche') {, ніша{{ item.cabinet.applianceLabel ? ' (' + item.cabinet.applianceLabel + ')' : '' }}}
-									@case ('open') {, відкриті полиці}
+									@case ('doors') {, <span translate="двері"></span>}
+									@case ('drawers') {, <span translate="шухляди"></span>}
+									@case ('niche') {, <span translate="ніша"></span>{{ item.cabinet.applianceLabel ? ' (' + item.cabinet.applianceLabel + ')' : '' }}}
+									@case ('open') {, <span translate="відкриті полиці"></span>}
 								}
 							}
 						</h3>
@@ -489,48 +488,50 @@
 							type="button"
 							(click)="removeCabinet(item.cabinet.id)"
 							class="text-gray-400 hover:text-red-400 transition-colors text-sm"
-						>
-							Видалити
-						</button>
+							translate="Видалити"
+						></button>
 					</div>
 
 					<!-- Editable params -->
 					<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-3">
 						<label class="block">
-							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-								>Ряд</span
-							>
+							<span
+								class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								translate="Ряд"
+							></span>
 							<select
 								[value]="item.cabinet.type"
 								(change)="updateCabinet(item.cabinet.id, 'type', $event)"
 								class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 							>
-								<option value="base">Нижня</option>
-								<option value="wall">Верхня</option>
-								<option value="tall">Пенал (на всю висоту)</option>
+								<option value="base" translate="Нижня"></option>
+								<option value="wall" translate="Верхня"></option>
+								<option value="tall" translate="Пенал (на всю висоту)"></option>
 							</select>
 						</label>
 						@if (item.cabinet.type !== 'tall') {
 							<label class="block">
-								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-									>Фасад</span
-								>
+								<span
+									class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									translate="Фасад"
+								></span>
 								<select
 									[value]="item.cabinet.facadeType"
 									(change)="updateCabinet(item.cabinet.id, 'facadeType', $event)"
 									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 								>
-									<option value="doors">Двері</option>
-									<option value="drawers">Шухляди</option>
-									<option value="niche">Ніша під техніку</option>
-									<option value="open">Відкриті полиці</option>
+									<option value="doors" translate="Двері"></option>
+									<option value="drawers" translate="Шухляди"></option>
+									<option value="niche" translate="Ніша під техніку"></option>
+									<option value="open" translate="Відкриті полиці"></option>
 								</select>
 							</label>
 						}
 						<label class="block">
-							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-								>Ширина, мм</span
-							>
+							<span
+								class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								translate="Ширина, мм"
+							></span>
 							<input
 								type="number"
 								[value]="item.cabinet.width"
@@ -540,9 +541,10 @@
 						</label>
 						@if (item.cabinet.type !== 'tall') {
 							<label class="block">
-								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-									>Висота, мм</span
-								>
+								<span
+									class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									translate="Висота, мм"
+								></span>
 								<input
 									type="number"
 									[value]="item.cabinet.height"
@@ -552,9 +554,10 @@
 							</label>
 						}
 						<label class="block">
-							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-								>Глибина, мм</span
-							>
+							<span
+								class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								translate="Глибина, мм"
+							></span>
 							<input
 								type="number"
 								[value]="item.cabinet.depth"
@@ -564,9 +567,10 @@
 						</label>
 						@if (item.cabinet.type !== 'tall' && (item.cabinet.facadeType === 'doors' || item.cabinet.facadeType === 'drawers')) {
 							<label class="block">
-								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-									>{{ item.cabinet.facadeType === 'doors' ? 'Дверей' : 'Шухляд' }}</span
-								>
+								<span
+									class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									[translate]="item.cabinet.facadeType === 'doors' ? 'Дверей' : 'Шухляд'"
+								></span>
 								<input
 									type="number"
 									min="1"
@@ -580,9 +584,10 @@
 
 					@if (item.cabinet.type === 'tall') {
 						<div class="mb-5 space-y-2">
-							<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-								>Сегменти пенала (згори вниз)</span
-							>
+							<span
+								class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+								translate="Сегменти пенала (згори вниз)"
+							></span>
 							@for (seg of item.cabinet.segments; track $index) {
 								<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 items-center bg-warm-white dark:bg-dark rounded-lg p-2">
 									<input
@@ -590,7 +595,7 @@
 										min="50"
 										[value]="seg.height"
 										(input)="updateSegment(item.cabinet.id, $index, 'height', $event)"
-										placeholder="Висота, мм"
+										[placeholder]="heightPlaceholder()"
 										class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 									/>
 									<select
@@ -598,10 +603,10 @@
 										(change)="updateSegment(item.cabinet.id, $index, 'facadeType', $event)"
 										class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 									>
-										<option value="doors">Двері</option>
-										<option value="drawers">Шухляди</option>
-										<option value="niche">Ніша під техніку</option>
-										<option value="open">Відкриті полиці</option>
+										<option value="doors" translate="Двері"></option>
+										<option value="drawers" translate="Шухляди"></option>
+										<option value="niche" translate="Ніша під техніку"></option>
+										<option value="open" translate="Відкриті полиці"></option>
 									</select>
 									@if (seg.facadeType === 'doors' || seg.facadeType === 'drawers') {
 										<input
@@ -609,7 +614,7 @@
 											min="1"
 											[value]="seg.facades"
 											(input)="updateSegment(item.cabinet.id, $index, 'facades', $event)"
-											placeholder="К-сть"
+											[placeholder]="countPlaceholder()"
 											class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
 										/>
 									}
@@ -618,7 +623,7 @@
 											type="text"
 											[value]="seg.applianceLabel"
 											(input)="updateSegment(item.cabinet.id, $index, 'applianceLabel', $event)"
-											placeholder="напр. Духова шафа"
+											[placeholder]="ovenExamplePlaceholder()"
 											class="rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige col-span-2"
 										/>
 									}
@@ -626,27 +631,26 @@
 										type="button"
 										(click)="removeSegment(item.cabinet.id, $index)"
 										class="text-gray-400 hover:text-red-400 transition-colors text-xs justify-self-end"
-									>
-										Видалити
-									</button>
+										translate="Видалити"
+									></button>
 								</div>
 							}
 							<button
 								type="button"
 								(click)="addSegment(item.cabinet.id)"
 								class="text-xs font-semibold text-beige-dark hover:text-dark dark:hover:text-white transition-colors"
-							>
-								+ Додати сегмент
-							</button>
+								translate="+ Додати сегмент"
+							></button>
 						</div>
 					}
 
 					<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-5">
 						@if (item.cabinet.type !== 'tall' && (item.cabinet.facadeType === 'open' || item.cabinet.facadeType === 'doors')) {
 							<label class="block">
-								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-									>Полиць</span
-								>
+								<span
+									class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									translate="Полиць"
+								></span>
 								<input
 									type="number"
 									min="0"
@@ -658,12 +662,13 @@
 						}
 						@if (item.cabinet.type !== 'tall' && item.cabinet.facadeType === 'niche') {
 							<label class="block col-span-2">
-								<span class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
-									>Техніка</span
-								>
+								<span
+									class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400"
+									translate="Техніка"
+								></span>
 								<input
 									type="text"
-									placeholder="напр. Духова шафа"
+									[placeholder]="ovenExamplePlaceholder()"
 									[value]="item.cabinet.applianceLabel"
 									(input)="updateCabinet(item.cabinet.id, 'applianceLabel', $event)"
 									class="mt-1 w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-2 py-1.5 text-sm text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-beige"
@@ -678,7 +683,7 @@
 									(change)="updateCabinet(item.cabinet.id, 'hasSink', $event)"
 									class="w-4 h-4 accent-beige"
 								/>
-								<span class="text-xs text-gray-500 dark:text-gray-400">Мийка + сифон</span>
+								<span class="text-xs text-gray-500 dark:text-gray-400" translate="Мийка + сифон"></span>
 							</label>
 							<label class="flex items-center gap-2 mt-5">
 								<input
@@ -687,7 +692,7 @@
 									(change)="updateCabinet(item.cabinet.id, 'hasCooktop', $event)"
 									class="w-4 h-4 accent-beige"
 								/>
-								<span class="text-xs text-gray-500 dark:text-gray-400">Варильна поверхня</span>
+								<span class="text-xs text-gray-500 dark:text-gray-400" translate="Варильна поверхня"></span>
 							</label>
 						}
 						<label class="flex items-center gap-2 mt-5">
@@ -697,7 +702,7 @@
 								(change)="updateCabinet(item.cabinet.id, 'cornerAfter', $event)"
 								class="w-4 h-4 accent-beige"
 							/>
-							<span class="text-xs text-gray-500 dark:text-gray-400">Кут після цієї шафи</span>
+							<span class="text-xs text-gray-500 dark:text-gray-400" translate="Кут після цієї шафи"></span>
 						</label>
 					</div>
 
@@ -706,15 +711,15 @@
 						<table class="w-full text-sm">
 							<thead>
 								<tr class="text-left text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider">
-									<th class="py-2 pr-4">Деталь</th>
-									<th class="py-2 pr-4">Розмір, мм (Ш × В/Г)</th>
-									<th class="py-2">К-сть</th>
+									<th class="py-2 pr-4" translate="Деталь"></th>
+									<th class="py-2 pr-4" translate="Розмір, мм (Ш × В/Г)"></th>
+									<th class="py-2" translate="К-сть"></th>
 								</tr>
 							</thead>
 							<tbody>
 								@for (part of item.parts; track part.name) {
 									<tr class="border-t border-gray-100 dark:border-gray-800">
-										<td class="py-2 pr-4 text-dark dark:text-white">{{ part.name }}</td>
+										<td class="py-2 pr-4 text-dark dark:text-white" [translate]="part.name"></td>
 										<td class="py-2 pr-4 text-gray-500 dark:text-gray-400">{{ part.size }}</td>
 										<td class="py-2 text-gray-500 dark:text-gray-400">{{ part.qty }}</td>
 									</tr>
@@ -724,18 +729,16 @@
 					</div>
 
 					<div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-gray-500 dark:text-gray-400 mt-4">
-						<span>ЛДСП корпус: {{ item.ldspArea | number: '1.2-2' }} м²</span>
-						<span>Фасади: {{ item.facadeArea | number: '1.2-2' }} м²</span>
-						<span>ХДФ: {{ item.hdfArea | number: '1.2-2' }} м²</span>
-						<span>Крайка: {{ item.edgeLength | number: '1.1-1' }} пог. м</span>
+						<span><span translate="ЛДСП корпус"></span>: {{ item.ldspArea | number: '1.2-2' }} м²</span>
+						<span><span translate="Фасади"></span>: {{ item.facadeArea | number: '1.2-2' }} м²</span>
+						<span><span translate="ХДФ"></span>: {{ item.hdfArea | number: '1.2-2' }} м²</span>
+						<span><span translate="Крайка"></span>: {{ item.edgeLength | number: '1.1-1' }} <span translate="пог. м"></span></span>
 					</div>
 				</div>
 			}
 
 			@if (!breakdown().length) {
-				<div class="text-center py-12 text-gray-500 dark:text-gray-400">
-					Список шаф порожній. Натисніть "Згенерувати список шаф" або додайте шафу вручну.
-				</div>
+				<div class="text-center py-12 text-gray-500 dark:text-gray-400" translate='Список шаф порожній. Натисніть "Згенерувати список шаф" або додайте шафу вручну.'></div>
 			}
 		</div>
 
@@ -744,33 +747,25 @@
 				type="button"
 				(click)="addCabinet('base')"
 				class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-dark dark:text-white hover:bg-beige/20 transition-colors"
-			>
-				+ Додати нижню шафу
-			</button>
+				translate="+ Додати нижню шафу"
+			></button>
 			<button
 				type="button"
 				(click)="addCabinet('wall')"
 				class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-dark dark:text-white hover:bg-beige/20 transition-colors"
-			>
-				+ Додати верхню шафу
-			</button>
+				translate="+ Додати верхню шафу"
+			></button>
 			<button
 				type="button"
 				(click)="addCabinet('tall')"
 				class="px-4 py-2 rounded-full text-sm font-semibold bg-white dark:bg-dark-light text-dark dark:text-white hover:bg-beige/20 transition-colors"
-			>
-				+ Додати пенал
-			</button>
+				translate="+ Додати пенал"
+			></button>
 		</div>
 
-		<p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mt-8 max-w-2xl mx-auto text-center">
-			Загальні габарити приклада (довжина крил ≈ 3,41 м і 2,155 м, висота ≈ 2,1 м) виміряні напряму
-			з 3D-моделі. Сама модель не містить розбивки на окремі шафи — це вже потребує ручного
-			креслення — тож склад і типи кожної шафи (двері, шухляди, ніші під техніку, мийка) підібрані
-			за фотографією рендеру. Розрахунок технічний, за типовою конструкцією корпусної меблі
-			(боковини, дно, царги/верх, полиці, фасади/шухляди із зазором 3 мм, задня стінка з ХДФ, ніші
-			під техніку без фасаду). Він не враховує внутрішню фурнітуру шухляд (напрямні, короб) і не є
-			остаточним кресленням розкрою. Для точного проєкту замовте безкоштовний замір.
-		</p>
+		<p
+			class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mt-8 max-w-2xl mx-auto text-center"
+			translate="Загальні габарити приклада (довжина крил ≈ 3,41 м і 2,155 м, висота ≈ 2,1 м) виміряні напряму з 3D-моделі. Сама модель не містить розбивки на окремі шафи — це вже потребує ручного креслення — тож склад і типи кожної шафи (двері, шухляди, ніші під техніку, мийка) підібрані за фотографією рендеру. Розрахунок технічний, за типовою конструкцією корпусної меблі (боковини, дно, царги/верх, полиці, фасади/шухляди із зазором 3 мм, задня стінка з ХДФ, ніші під техніку без фасаду). Він не враховує внутрішню фурнітуру шухляд (напрямні, короб) і не є остаточним кресленням розкрою. Для точного проєкту замовте безкоштовний замір."
+		></p>
 	</div>
 </section>

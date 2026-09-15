@@ -1,0 +1,82 @@
+<section class="bg-warm-white dark:bg-dark min-h-screen">
+	@if (product; as product) {
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-10 sm:pb-16">
+			<nav class="text-sm text-gray-500 dark:text-gray-400 mb-8">
+				<a routerLink="/" class="hover:text-beige-dark transition-colors">Головна</a>
+				<span class="mx-2">/</span>
+				<a routerLink="/catalog" class="hover:text-beige-dark transition-colors">Каталог</a>
+				<span class="mx-2">/</span>
+				<span class="text-dark dark:text-white">{{ product.title }}</span>
+			</nav>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+				<div class="rounded-2xl overflow-hidden shadow-sm bg-white dark:bg-dark-light">
+					<img [src]="product.image" [alt]="product.title" width="1200" height="900" class="w-full h-auto object-cover" />
+				</div>
+
+				<div>
+					<span class="text-sm text-gray-500 dark:text-gray-400 block mb-2">{{ product.category }}</span>
+					<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white mb-6">{{ product.title }}</h1>
+
+					<dl class="divide-y divide-gray-100 dark:divide-gray-800 border-t border-b border-gray-100 dark:border-gray-800 mb-6">
+						@for (entry of specEntries; track entry[0]) {
+							<div class="flex justify-between py-3 text-sm">
+								<dt class="text-gray-500 dark:text-gray-400">{{ entry[0] }}</dt>
+								<dd class="text-dark dark:text-white font-medium text-right">{{ entry[1] }}</dd>
+							</div>
+						}
+					</dl>
+
+					<p class="text-3xl font-bold text-dark dark:text-white mb-6">
+						{{ product.price }} {{ product.currency }} <span class="text-base font-normal text-gray-400">/ шт.</span>
+					</p>
+
+					<div class="flex flex-wrap items-center gap-4 mb-4">
+						<div class="flex items-center gap-2">
+							<button
+								type="button"
+								(click)="changeQty(-1)"
+								class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-white dark:hover:bg-dark-light transition-colors"
+							>
+								−
+							</button>
+							<span class="w-8 text-center text-dark dark:text-white">{{ qty }}</span>
+							<button
+								type="button"
+								(click)="changeQty(1)"
+								class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-white dark:hover:bg-dark-light transition-colors"
+							>
+								+
+							</button>
+						</div>
+						<button
+							type="button"
+							[disabled]="!product.inStock"
+							class="flex-1 sm:flex-none px-8 py-3 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+						>
+							До кошика
+						</button>
+					</div>
+
+					<p class="text-sm mb-4" [class]="product.inStock ? 'text-green-600 dark:text-green-400' : 'text-gray-400'">
+						@if (product.inStock) {
+							В наявності{{ product.stockQty != null ? ': ' + product.stockQty + ' шт.' : '' }}
+						} @else {
+							Немає в наявності
+						}
+					</p>
+
+					<p class="text-xs text-gray-400">Ціна попередня. Остаточну вартість уточніть під час замовлення.</p>
+
+					<div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
+						<p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ product.description }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	} @else {
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center text-gray-500 dark:text-gray-400">
+			Товар не знайдено.
+		</div>
+	}
+</section>
