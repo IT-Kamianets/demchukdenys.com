@@ -1,77 +1,114 @@
 <section class="bg-warm-white dark:bg-dark min-h-screen">
 	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6">
 		<nav class="text-sm text-gray-500 dark:text-gray-400 mb-6">
-			<a routerLink="/" class="hover:text-beige-dark transition-colors">Головна</a>
+			<a routerLink="/catalog" class="hover:text-beige-dark transition-colors">Каталог</a>
 			<span class="mx-2">/</span>
 			<span class="text-dark dark:text-white">Кошик</span>
 		</nav>
 		<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white">Ваш кошик</h1>
 	</div>
 
-	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-		<div class="lg:col-span-2 bg-white dark:bg-dark-light rounded-2xl shadow-sm divide-y divide-gray-100 dark:divide-gray-800">
-			@for (item of items(); track item.id) {
-				<div class="flex items-center gap-4 p-5 sm:p-6">
-					<img [src]="item.image" [alt]="item.title" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
-					<div class="flex-1 min-w-0">
-						<p class="text-dark dark:text-white font-semibold mb-2">{{ item.title }}</p>
-						<div class="flex items-center gap-2">
+	@if (items().length) {
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+			<div class="lg:col-span-2 bg-white dark:bg-dark-light rounded-2xl shadow-sm divide-y divide-gray-100 dark:divide-gray-800">
+				@for (item of items(); track item.id) {
+					<div class="flex items-center gap-4 p-5 sm:p-6">
+						<img [src]="item.image" [alt]="item.title" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
+						<div class="flex-1 min-w-0">
+							<p class="text-dark dark:text-white font-semibold mb-2">{{ item.title }}</p>
+							<div class="flex items-center gap-2">
+								<button
+									type="button"
+									(click)="changeQty(item.id, -1, item.qty)"
+									class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-warm-white dark:hover:bg-dark transition-colors"
+								>
+									−
+								</button>
+								<span class="w-6 text-center text-sm text-dark dark:text-white">{{ item.qty }}</span>
+								<button
+									type="button"
+									(click)="changeQty(item.id, 1, item.qty)"
+									class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-warm-white dark:hover:bg-dark transition-colors"
+								>
+									+
+								</button>
+							</div>
 							<button
 								type="button"
-								(click)="changeQty(item.id, -1, item.qty)"
-								class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-warm-white dark:hover:bg-dark transition-colors"
+								(click)="remove(item.id)"
+								class="mt-2 text-xs text-gray-400 hover:text-red-400 transition-colors underline"
 							>
-								−
-							</button>
-							<span class="w-6 text-center text-sm text-dark dark:text-white">{{ item.qty }}</span>
-							<button
-								type="button"
-								(click)="changeQty(item.id, 1, item.qty)"
-								class="w-7 h-7 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-dark dark:text-white hover:bg-warm-white dark:hover:bg-dark transition-colors"
-							>
-								+
+								Видалити
 							</button>
 						</div>
-						<button
-							type="button"
-							(click)="remove(item.id)"
-							class="mt-2 text-xs text-gray-400 hover:text-red-400 transition-colors underline"
-						>
-							Видалити
-						</button>
+						<p class="text-dark dark:text-white font-bold whitespace-nowrap">
+							{{ item.price * item.qty }} грн
+						</p>
 					</div>
-					<p class="text-dark dark:text-white font-bold whitespace-nowrap">
-						{{ item.price * item.qty }} грн
-					</p>
+				}
+			</div>
+
+			<aside class="bg-white dark:bg-dark-light rounded-2xl p-6 shadow-sm lg:sticky lg:top-24">
+				<h2 class="text-lg font-bold text-dark dark:text-white mb-4">Разом</h2>
+				<div class="flex justify-between items-center mb-6">
+					<span class="text-gray-500 dark:text-gray-400">Сума</span>
+					<span class="text-2xl font-bold text-dark dark:text-white">{{ total() }} грн</span>
 				</div>
-			} @empty {
-				<div class="p-10 text-center text-gray-500 dark:text-gray-400">Кошик порожній.</div>
-			}
+
+				<a
+					routerLink="/checkout"
+					class="block text-center w-full px-6 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
+				>
+					Оформити замовлення
+				</a>
+
+				<div class="rounded-xl bg-warm-white dark:bg-dark p-4 mt-4 text-sm text-gray-500 dark:text-gray-400 space-y-2">
+					<p>Це приклад наповненого кошика для демонстрації сторінки. Онлайн-оплата поки недоступна.</p>
+					<p>
+						Замовити товар можна за телефоном
+						<a [href]="phoneHref" class="text-beige-dark font-semibold hover:underline">{{ phoneDisplay }}</a
+						>.
+					</p>
+					<p>Ціни попередні.</p>
+				</div>
+			</aside>
 		</div>
-
-		<aside class="bg-white dark:bg-dark-light rounded-2xl p-6 shadow-sm lg:sticky lg:top-24">
-			<h2 class="text-lg font-bold text-dark dark:text-white mb-4">Разом</h2>
-			<div class="flex justify-between items-center mb-6">
-				<span class="text-gray-500 dark:text-gray-400">Сума</span>
-				<span class="text-2xl font-bold text-dark dark:text-white">{{ total() }} грн</span>
-			</div>
-
-			<a
-				routerLink="/checkout"
-				class="block text-center w-full px-6 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
+	} @else {
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+			<div
+				class="bg-white dark:bg-dark-light rounded-2xl shadow-sm flex flex-col items-center text-center py-16 px-6 sm:py-20"
 			>
-				Оформити замовлення
-			</a>
-
-			<div class="rounded-xl bg-warm-white dark:bg-dark p-4 mt-4 text-sm text-gray-500 dark:text-gray-400 space-y-2">
-				<p>Це приклад наповненого кошика для демонстрації сторінки. Онлайн-оплата поки недоступна.</p>
-				<p>
-					Замовити товар можна за телефоном
-					<a [href]="phoneHref" class="text-beige-dark font-semibold hover:underline">{{ phoneDisplay }}</a
-					>.
+				<div
+					class="w-20 h-20 rounded-full bg-warm-white dark:bg-dark flex items-center justify-center mb-6 text-beige-dark"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="w-10 h-10"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.435m0 0L6.75 15.75A2.25 2.25 0 0 0 9 18h8.25a2.25 2.25 0 0 0 2.24-2.02L21 8.25H5.106m0 0L4.5 6"
+						/>
+						<circle cx="9" cy="20.5" r="1" fill="currentColor" stroke="none" />
+						<circle cx="17" cy="20.5" r="1" fill="currentColor" stroke="none" />
+					</svg>
+				</div>
+				<h2 class="text-xl sm:text-2xl font-bold text-dark dark:text-white mb-2">Ваш кошик порожній</h2>
+				<p class="text-gray-500 dark:text-gray-400 max-w-sm mb-8">
+					Додайте товари з каталогу, щоб оформити замовлення.
 				</p>
-				<p>Ціни попередні.</p>
+				<a
+					routerLink="/catalog"
+					class="inline-block px-8 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
+				>
+					Переглянути каталог
+				</a>
 			</div>
-		</aside>
-	</div>
+		</div>
+	}
 </section>

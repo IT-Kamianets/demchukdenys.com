@@ -1,7 +1,7 @@
 <section class="bg-warm-white dark:bg-dark min-h-screen">
 	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6">
 		<nav class="text-sm text-gray-500 dark:text-gray-400 mb-6">
-			<a routerLink="/" class="hover:text-beige-dark transition-colors">Головна</a>
+			<a routerLink="/catalog" class="hover:text-beige-dark transition-colors">Каталог</a>
 			<span class="mx-2">/</span>
 			<a routerLink="/cart" class="hover:text-beige-dark transition-colors">Кошик</a>
 			<span class="mx-2">/</span>
@@ -10,6 +10,48 @@
 		<h1 class="text-2xl sm:text-3xl font-bold text-dark dark:text-white">Оформлення замовлення</h1>
 	</div>
 
+	@if (!ready()) {
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+			<div class="bg-white dark:bg-dark-light rounded-2xl shadow-sm h-64 animate-pulse"></div>
+		</div>
+	} @else if (!items().length) {
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+			<div
+				class="bg-white dark:bg-dark-light rounded-2xl shadow-sm flex flex-col items-center text-center py-16 px-6 sm:py-20"
+			>
+				<div
+					class="w-20 h-20 rounded-full bg-warm-white dark:bg-dark flex items-center justify-center mb-6 text-beige-dark"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="w-10 h-10"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.435m0 0L6.75 15.75A2.25 2.25 0 0 0 9 18h8.25a2.25 2.25 0 0 0 2.24-2.02L21 8.25H5.106m0 0L4.5 6"
+						/>
+						<circle cx="9" cy="20.5" r="1" fill="currentColor" stroke="none" />
+						<circle cx="17" cy="20.5" r="1" fill="currentColor" stroke="none" />
+					</svg>
+				</div>
+				<h2 class="text-xl sm:text-2xl font-bold text-dark dark:text-white mb-2">Ваш кошик порожній</h2>
+				<p class="text-gray-500 dark:text-gray-400 max-w-sm mb-8">
+					Додайте товари з каталогу, щоб оформити замовлення.
+				</p>
+				<a
+					routerLink="/catalog"
+					class="inline-block px-8 py-3.5 bg-dark dark:bg-beige text-white dark:text-dark font-semibold rounded-xl hover:bg-dark-light dark:hover:bg-beige-light transition-colors"
+				>
+					Переглянути каталог
+				</a>
+			</div>
+		</div>
+	} @else {
 	<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 		<div class="lg:col-span-2 bg-white dark:bg-dark-light rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
 			<h2 class="text-lg font-bold text-dark dark:text-white mb-2">Дані для доставки</h2>
@@ -44,7 +86,7 @@
 				}
 			</div>
 
-			<div>
+			<div class="relative">
 				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
 					>Місто</label
 				>
@@ -52,20 +94,66 @@
 					type="text"
 					[(ngModel)]="city"
 					name="city"
+					autocomplete="off"
+					(input)="onCityChange(); onCityInput()"
+					(focus)="onCityInput()"
+					(blur)="hideCitySuggestions()"
 					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige"
 				/>
+				@if (showCitySuggestions()) {
+					<ul
+						class="absolute z-10 mt-1 w-full max-h-64 overflow-auto rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-light shadow-lg"
+					>
+						@for (suggestion of citySuggestions(); track suggestion.name) {
+							<li>
+								<button
+									type="button"
+									(mousedown)="selectCity(suggestion)"
+									class="w-full text-left px-4 py-2.5 hover:bg-warm-white dark:hover:bg-dark transition-colors"
+								>
+									<span class="block text-dark dark:text-white">{{ suggestion.name }}</span>
+									<span class="block text-xs text-gray-500 dark:text-gray-400">{{ suggestion.area }} обл.</span>
+								</button>
+							</li>
+						}
+					</ul>
+				}
 			</div>
 
-			<div>
+			<div class="relative">
 				<label class="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2"
-					>Адреса доставки</label
+					>Адреса доставки (відділення Нової Пошти)</label
 				>
 				<textarea
 					[(ngModel)]="address"
 					name="address"
 					rows="2"
+					autocomplete="off"
+					(input)="onAddressInput()"
+					(focus)="onAddressInput()"
+					(blur)="hideWarehouseSuggestions()"
 					class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-dark dark:text-white outline-none focus:ring-2 focus:ring-beige resize-none"
 				></textarea>
+				@if (!city.trim()) {
+					<p class="text-xs text-gray-400 mt-1.5">Спочатку вкажіть місто, щоб побачити відділення.</p>
+				}
+				@if (showWarehouseSuggestions()) {
+					<ul
+						class="absolute z-10 mt-1 w-full max-h-64 overflow-auto rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-light shadow-lg"
+					>
+						@for (suggestion of warehouseSuggestions(); track suggestion.ref) {
+							<li>
+								<button
+									type="button"
+									(mousedown)="selectWarehouse(suggestion)"
+									class="w-full text-left px-4 py-2.5 hover:bg-warm-white dark:hover:bg-dark transition-colors"
+								>
+									<span class="block text-dark dark:text-white">№{{ suggestion.number }}: {{ suggestion.shortAddress }}</span>
+								</button>
+							</li>
+						}
+					</ul>
+				}
 			</div>
 
 			<div>
@@ -144,8 +232,6 @@
 						<span class="text-dark dark:text-white">{{ item.title }} × {{ item.qty }}</span>
 						<span class="text-gray-500 dark:text-gray-400 whitespace-nowrap ml-3">{{ item.price * item.qty }} грн</span>
 					</div>
-				} @empty {
-					<p class="text-sm text-gray-400">Кошик порожній.</p>
 				}
 			</div>
 			<div class="flex justify-between items-center border-t border-gray-100 dark:border-gray-800 pt-4 mb-6">
@@ -165,4 +251,5 @@
 			}
 		</aside>
 	</div>
+	}
 </section>
